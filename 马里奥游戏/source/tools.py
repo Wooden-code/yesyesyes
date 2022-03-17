@@ -97,7 +97,7 @@ import sys
 
 def button(x,y,w,h):
     mouse_x,mouse_y=pygame.mouse.get_pos()
-    mouse=pygame.mouse.get_pressed()
+    mouse=pygame.mouse.get_pressed()#这个w不是纯纯wide而是x坐标加上宽度的w
     clock=pygame.time.Clock()
     clock.tick(300)
 

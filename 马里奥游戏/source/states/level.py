@@ -28,6 +28,7 @@ class Level:
         self.check_y_collision()
 
 
+
         self.setup_checkpoints()
 
 
@@ -76,7 +77,6 @@ class Level:
         self.powerup_group=pygame.sprite.Group()
         self.pipe_and_well_group=pygame.sprite.Group()
 
-
         if 'brick' in self.map_data:
             for brick_data in self.map_data['brick']:
                 x,y=brick_data['x'],brick_data['y']
@@ -102,8 +102,8 @@ class Level:
                 else:
                     self.box_group.add(box.Box(x,y,box_type,self.powerup_group))
 
-        if 'coin' in self.map_data:
-            for coin_data in self.map_data['coin']:
+        if 'words' in self.map_data:
+            for coin_data in self.map_data['words']:
                 x,y=coin_data['x'],coin_data['y']
                 self.coin_group.add(coin.Coin(x,y,None,None))
 
@@ -119,6 +119,7 @@ class Level:
         self.enemy_group=pygame.sprite.Group()
         self.shell_group=pygame.sprite.Group()
         self.enemy_group_dict={}
+
 
         for enemy_group_data in self.map_data['enemy']:
             group=pygame.sprite.Group()
@@ -214,8 +215,9 @@ class Level:
             shell.state='slide'
         powerup=pygame.sprite.spritecollideany(self.player,self.powerup_group)
         if powerup:
-            if powerup.name=='fireball':
-                pass
+            if powerup.name=='slj':
+                self.player.go_die()
+                powerup.kill()
             if powerup.name=='mushroom':
                 self.player.state='small2big'
                 powerup.kill()
@@ -245,6 +247,10 @@ class Level:
         pipe_and_well = pygame.sprite.spritecollideany(self.player, self.pipe_and_well_group)
         if pipe_and_well:
             self.adjust_player_y(pipe_and_well)
+
+        word=pygame.sprite.spritecollideany(self.player,self.coin_group)
+        if word:
+            word.kill()
 
 
 
@@ -373,11 +379,12 @@ class Level:
 
     def update_game_info(self):
         if self.player.dead:
-            self.game_info['lives']-=1
-        if self.game_info['lives']==0:
-            self.next='game_over'
-        else:
-            self.next='load_screen'
+            self.next='ask'
+            #self.game_info['lives']-=1
+       # if self.game_info['lives']==0:
+        #    self.next='game_over'
+        #else:
+        #    self.next='load_screen'
 
     def is_frozen(self):
         return self.player.state in ['small2big','big2small','big2fire','fire2small']

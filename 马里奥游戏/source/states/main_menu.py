@@ -69,6 +69,7 @@ class MainMenu:
                 self.finished=True
             elif self.cursor.state=='2P':
                 self.finished=True
+
         self.check_if = tools.button(592, 653, 654, 759)
 
     def update(self, surface, keys):  # 更新操作

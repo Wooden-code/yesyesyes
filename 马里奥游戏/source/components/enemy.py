@@ -8,6 +8,7 @@ import pygame
 from .. import setup,tools
 from ..components import powerup
 from .. import constants as C
+from ..states import level
 def create_enemy(enemy_data):
     enemy_type=enemy_data['type']
     x,y_bottom,direction,color=enemy_data['x'],enemy_data['y'],enemy_data['direction'],enemy_data['color']#注意这里y是底部的y
@@ -41,6 +42,7 @@ class Enemy(pygame.sprite.Sprite):
         self.y_vel=0
         self.gravity=C.GRAVITY
         self.state='walk'
+        self.can_shoot = True
 
 
     def load_frames(self,name,frame_rects):
@@ -79,6 +81,10 @@ class Enemy(pygame.sprite.Sprite):
             self.image=self.right_frames[self.frame_index]
         else:
             self.image=self.left_frames[self.frame_index]
+
+    def can_shoot_or_not(self, level):
+        if self.rect.x-level.player.rect.x>300:
+            self.can_shoot = True
 
     def walk(self):
         if self.current_time-self.timer>125:
@@ -130,6 +136,10 @@ class Enemy(pygame.sprite.Sprite):
             if powerup.name=='fireball':
                 self.death_timer=self.current_time
                 self.state='die'
+        if self.rect.x-level.player.rect.x<600 and self.can_shoot==True and self.name=='koopa':
+
+            self.shoot_slj(level)
+            self.can_shoot=False
 
 
 
@@ -152,6 +162,10 @@ class Enemy(pygame.sprite.Sprite):
 
     def go_die(self,how,direction=1):
         pass
+    def shoot_slj(self,level):
+
+        slj = powerup.Slj(self.rect.centerx, self.rect.centery, -1)  # 火球是pygame中的精灵
+        level.powerup_group.add(slj)  # 把发射火球这个方法传入level中的这个组中
 
 
 class normal_enemy(Enemy):#normal

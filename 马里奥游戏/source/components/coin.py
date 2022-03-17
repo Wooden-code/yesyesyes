@@ -6,6 +6,7 @@
 import pygame.sprite
 from .. import tools,setup
 from .. import constants as C
+from ..states import level
 
 
 class FlashingCoin(pygame.sprite.Sprite):#引入这个精灵方法
@@ -49,11 +50,12 @@ class Coin(pygame.sprite.Sprite):
         self.coin_type = coin_type
         self.group = group
         self.name = name
+
         self.frame_rects =[(1,160,5,8),(9,160,5,8),(17,160,5,8),(9,160,5,8)]
 
         self.frames = []
         for frame_rect in self.frame_rects:
-            self.frames.append(tools.get_image(setup.GRAPHICS['item_objects.png'], *frame_rect, (0, 0, 0), C.BRICK_MULTI))
+            self.frames.append(tools.get_image(setup.GRAPHICS['words.png'], *frame_rect, (0, 0, 0), C.BRICK_MULTI))
 
         self.frame_index = 0
         self.image = self.frames[self.frame_index]
@@ -64,6 +66,9 @@ class Coin(pygame.sprite.Sprite):
 
         self.state = 'rest'  # 默认状态
         self.timer = 0
+    def check_y(self):
+        pass
+
 
     def update(self):
         self.current_time = pygame.time.get_ticks()

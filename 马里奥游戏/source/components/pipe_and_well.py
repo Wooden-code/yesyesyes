@@ -15,9 +15,9 @@ class Pipe_and_well(pygame.sprite.Sprite):
 
 
         self.frames=[]
-        self.frames.append(tools.get_image(setup.GRAPHICS['pipe.png'],242.7,235.5,340,358.7, (255, 255, 255),C.PIPE_MULTI))
+        self.frames.append(setup.GRAPHICS['pipe.png'])
 
-        self.frames.append(tools.get_image(setup.GRAPHICS['well.png'],417.4,148.35,2642.7,1531.8,(255,255,255),C.WELL_MULTI))
+        self.frames.append(setup.GRAPHICS['well.png'])
 
         if self.type==0:
             self.image = self.frames[self.type]

@@ -177,6 +177,9 @@
         {"x":5531, "y":193, "type":1},
         {"x":7288, "y":365, "type":1}
     ],
+    "words": [
+        {"x": 500,"y": 620,"type": 1}
+    ],
     "enemy":[
         {"0":[
             {"x":1120, "y":538, "direction":0, "type":0, "color":0}
@@ -197,10 +200,10 @@
             {"x":4330, "y":538, "direction":0, "type":0, "color":0}
         ]},
         {"5":[
-            {"x":4700, "y":538, "direction":0, "type":1, "color":1}
+            {"x":4700, "y":538, "direction":0, "type":1, "color":0}
         ]},
         {"6":[
-            {"x":4900, "y":538, "direction":0, "type":0, "color":0},
+            {"x":4900, "y":538, "direction":0, "type":0, "color":1},
             {"x":4960, "y":538, "direction":0, "type":0, "color":0}
         ]},
         {"7":[
@@ -208,7 +211,7 @@
             {"x":5360, "y":538, "direction":0, "type":0, "color":0}
         ]},
         {"8":[
-            {"x":5600, "y":538, "direction":0, "type":0, "color":0},
+            {"x":5600, "y":538, "direction":0, "type":0, "color":1},
             {"x":5660, "y":538, "direction":0, "type":0, "color":0}
         ]},
         {"9":[

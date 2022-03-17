@@ -75,11 +75,11 @@ def load_graphics(path):
 
 
             img = pygame.image.load(os.path.join(path, pic))
-           # if img.get_alpha():  # 如果是透明底的
+            if img.get_alpha():  # 如果是透明底的
 
-            #    img = img.convert_alpha()
-            #else:
-            #   img = img.convert()
+                img = img.convert_alpha()
+            else:
+                img = img.convert_alpha()
             graphics[pic] = img
         return graphics
 
@@ -100,10 +100,12 @@ def button(x,y,w,h):
     mouse=pygame.mouse.get_pressed()
     clock=pygame.time.Clock()
     clock.tick(300)
-    print(pygame.mouse.get_pos())
+
     if x<mouse_x < w and y<mouse_y <h :
         if mouse==(0,0,0):
             return 10
-        elif mouse==(1,0,0):
+        elif mouse==(1,0,0):#dianji
             return 8
+        else:
+            return 6
 

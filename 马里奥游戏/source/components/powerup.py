@@ -1,7 +1,7 @@
 
 import pygame
 from .. import setup,tools
-from ..components import enemy
+from ..components import enemy,player
 from .. import constants as C
 
 def create_powerup(centerx,centery,type):#根据主角不同状态出不同的东西
@@ -11,13 +11,17 @@ def create_powerup(centerx,centery,type):#根据主角不同状态出不同的�
 
 
 class Powerup(pygame.sprite.Sprite):
-    def __init__(self,centerx,centery,frame_rects):
+    def __init__(self,centerx,centery,frame_rects,name):
         pygame.sprite.Sprite.__init__(self)
 
         self.frames=[]
         self.frame_index=0
-        for frame_rect in frame_rects:
-            self.frames.append(tools.get_image(setup.GRAPHICS['item_objects.png'],*frame_rect,(0,0,0),2.5))
+        if name=='fireball':
+            for frame_rect in frame_rects:
+                self.frames.append(tools.get_image(setup.GRAPHICS['item_objects.png'],*frame_rect,(0,0,0),2.5))
+        elif name=='slj':
+            for frame_rect in frame_rects:
+                self.frames.append(tools.get_image(setup.GRAPHICS['slj_and_cloud.png'],*frame_rect,(255,255,255),0.15))
         self.image=self.frames[self.frame_index]
         self.rect=self.image.get_rect()
         self.rect.centerx=centerx
@@ -66,7 +70,8 @@ class Powerup(pygame.sprite.Sprite):
 
 class Mushroom(Powerup):
     def __init__(self,centerx,centery):
-        Powerup.__init__(self,centerx,centery,[(0,0,16,16)])
+        self.name = 'mushroom'
+        Powerup.__init__(self,centerx,centery,[(0,0,16,16)],self.name)
         self.x_vel=2
         self.state='grow'
         self.name='mushroom'
@@ -87,9 +92,11 @@ class Mushroom(Powerup):
 
 class Fireball(Powerup):
     def __init__(self,centerx,centery,direction):
+        self.name='fireball'
+
         frame_rects=[(96,144,8,8),(184,144,8,8),(96,152,8,8),(184,152,8,8),#旋转
                      (112,144,16,16),(112,168,16,16),(112,176,16,16)]#爆炸
-        Powerup.__init__(self,centerx,centery,frame_rects)
+        Powerup.__init__(self,centerx,centery,frame_rects,self.name)
         self.name='fireball'
         self.state='fly'
         self.direction=direction
@@ -97,6 +104,8 @@ class Fireball(Powerup):
         self.y_vel=0
 
         self.timer=0
+
+
 
     def update(self,level):
         self.current_time=pygame.time.get_ticks()
@@ -147,8 +156,63 @@ class Fireball(Powerup):
                 self.y_vel = -10#反弹效果
 
 
+class Slj(Powerup):
+    def __init__(self, centerx, centery, direction):
+        self.name = 'slj'
+        frame_rects = [(84.7,115.9,187,154.5),(291,127.8,153,154),(546.8,139.68,138.2,142.6)]
+        Powerup.__init__(self, centerx, centery, frame_rects,self.name)
+        self.name = 'slj'
+        self.state = 'fly'
+        self.direction = direction
+        self.x_vel =-10
+        self.y_vel = 0
+        # centery+=1000
+        self.timer = 0
 
 
+    def update(self, level):
+        self.current_time = pygame.time.get_ticks()
+        if self.state == 'fly':
+            self.y_vel = 0
+            if self.current_time - self.timer > 200:
+                self.frame_index += 1
+                self.frame_index %= 3
+                self.timer = self.current_time
+                self.image = self.frames[self.frame_index]  # 让火球旋转起来
+            self.update_position(level)
+        elif self.state == 'boom':
+            if self.current_time - self.timer > 50:
+                if self.frame_index < 4:
+                    self.frame_index += 1
+                    self.frame_index %=3
+                    self.timer = self.current_time
+                    self.image = self.frames[self.frame_index]
+                else:
+                    self.kill()
+
+    def update_position(self, level):
+        self.rect.x += self.x_vel
+        self.check_x_collisions(level)
+        #self.rect.y += self.y_vel
+        #self.check_y_collision(level)
+
+        if self.rect.x < 0 or self.rect.y > C.SCREEN_H:
+            self.kill()
+
+    def check_x_collisions(self, level):
+
+        if self.rect.x<=level.player.rect.x:
+            self.kill()
+
+
+    def check_y_collision(self, level):
+        #check_group = pygame.sprite.Group(level.ground_items_group, level.box_group, level.brick_group)
+        #sprite = pygame.sprite.spritecollideany(self, check_group)
+        #if sprite:
+        #    if self.rect.top < sprite.rect.top:
+        #        self.rect.bottom = sprite.rect.top
+        #        self.y_vel = -10  # 反弹效果
+        pass
 
 class LifeMushroon(Powerup):
     pass

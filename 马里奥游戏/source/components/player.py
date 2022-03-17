@@ -66,17 +66,25 @@ class Player(pygame.sprite.Sprite):
 
 
     def load_images(self):#主角的各种帧造型
-        boyu_day_normal=setup.GRAPHICS['boyu_day_normal.png']
+        boyu_day_normal_1=setup.GRAPHICS['boyu_day_normal_1.png']
+        boyu_day_normal_2 = setup.GRAPHICS['boyu_day_normal_2.png']
+        boyu_day_normal_3 = setup.GRAPHICS['boyu_day_normal_3.png']
+        boyu_day_normal_4 = setup.GRAPHICS['boyu_day_normal_4.png']
+        boyu_day_normal_5 = setup.GRAPHICS['boyu_day_normal_5.png']
+        boyu_day_normal_6 = setup.GRAPHICS['boyu_day_normal_6.png']
+        boyu_day_normal_7 = setup.GRAPHICS['boyu_day_normal_7.png']
+        boyu_day_normal_8 = setup.GRAPHICS['boyu_day_normal_8.png']
+
         boyu_night_normal=setup.GRAPHICS['boyu_night_normal.png']
         boyu_day_special=setup.GRAPHICS['boyu_day_special.png']
         boyu_night_special=setup.GRAPHICS['boyu_night_special.png']
         frame_rects = self.player_data['image_frames']
 
-        self.right_day_normal_frames = []#区分开来的格格帧库 最底层
+        self.right_day_normal_frames = [boyu_day_normal_1,boyu_day_normal_2,boyu_day_normal_3,boyu_day_normal_4,boyu_day_normal_5,boyu_day_normal_6,boyu_day_normal_7,boyu_day_normal_8]#区分开来的格格帧库 最底层
         self.right_night_normal_frames = []
         self.right_day_special_frames = []
         self.right_night_special_frames=[]
-        self.left_day_normal_frames = []
+        self.left_day_normal_frames = [pygame.transform.flip(boyu_day_normal_1, True, False),pygame.transform.flip(boyu_day_normal_2, True, False),pygame.transform.flip(boyu_day_normal_3, True, False),pygame.transform.flip(boyu_day_normal_4, True, False),pygame.transform.flip(boyu_day_normal_5, True, False),pygame.transform.flip(boyu_day_normal_6, True, False),pygame.transform.flip(boyu_day_normal_7, True, False),pygame.transform.flip(boyu_day_normal_8, True, False)]
         self.left_night_normal_frames = []
         self.left_day_special_frames = []
         self.left_night_special_frames=[]
@@ -99,17 +107,12 @@ class Player(pygame.sprite.Sprite):
         ]
 
 
-
         for group,group_frame_rects in frame_rects.items():#遍历键值对 将得到的帧图分门别类放入帧库
             for frame_rect in group_frame_rects:
 
 
                 if group=='right_day_normal':
-                    right_image = tools.get_image(boyu_day_normal, frame_rect['x'], frame_rect['y'], frame_rect['width'],
-                                                  frame_rect['height'], (0, 0, 0), C.PLAYER_MULTI)
-                    left_image = pygame.transform.flip(right_image, True, False)
-                    self.right_day_normal_frames.append(right_image)
-                    self.left_day_normal_frames.append(left_image)
+                    pass
                 if group=='right_night_normal':
                     right_image = tools.get_image(boyu_night_normal, frame_rect['x'], frame_rect['y'],
                                                   frame_rect['width'],

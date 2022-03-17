@@ -24,7 +24,7 @@ class LoadScreen:
     def update(self,surface,keys):
         mouse_x, mouse_y = pygame.mouse.get_pos()
         mouse = pygame.mouse.get_pressed()
-        tips = pygame.image.load("./resource/graphics/tips.png")
+        tips = setup.GRAPHICS['tips.png']
         self.setup_background()
         surface.blit(self.background, self.viewport)
         LoadScreen.angle = wrap_angle(LoadScreen.angle - 1)

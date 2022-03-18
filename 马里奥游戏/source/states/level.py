@@ -5,7 +5,7 @@
 # @software: PyCharm
 import pygame
 from ..components import info
-from .. import setup,tools
+from .. import setup,tools,sound
 from .. import constants as C
 from ..components import player,brick,stuff,box,enemy,coin,pipe_and_well
 import os
@@ -45,6 +45,7 @@ class Level:
 
 
 
+
         rect=self.background.get_rect()
         self.background=pygame.transform.scale(self.background,(int(rect.width*C.LEVEL_H_MULTI),int(rect.height*C.LEVEL_H_MULTI)))
 
@@ -76,6 +77,7 @@ class Level:
         self.coin_group=pygame.sprite.Group()
         self.powerup_group=pygame.sprite.Group()
         self.pipe_and_well_group=pygame.sprite.Group()
+
 
         if 'brick' in self.map_data:
             for brick_data in self.map_data['brick']:
@@ -119,6 +121,7 @@ class Level:
         self.enemy_group=pygame.sprite.Group()
         self.shell_group=pygame.sprite.Group()
         self.enemy_group_dict={}
+        self.small_house_group=pygame.sprite.Group()
 
 
         for enemy_group_data in self.map_data['enemy']:
@@ -140,6 +143,7 @@ class Level:
     def update(self,surface,keys):#调用玩家的更新方法 将键盘动作传入
 
         self.player.update(keys,self)#自身self就是level
+        sound.Music_BG.update(self, surface, keys)
 
         if self.player.dead:
             if pygame.time.get_ticks()-self.player.death_timer>3000:#获取当前时间 死了三秒以上则结束游戏
@@ -153,6 +157,7 @@ class Level:
             self.check_if_go_die()
             self.update_game_window()
             self.info.update()
+            self.succeed()
 
             self.brick_group.update()
             self.box_group.update()
@@ -339,6 +344,13 @@ class Level:
             sprite.state='fall'
         sprite.rect.y-=1
 
+    def succeed(self):
+
+        if self.player.rect.x>14955:
+            print("ooo")
+            self.finished=True
+            self.next='body_title'
+
 
 
 
@@ -359,6 +371,7 @@ class Level:
         self.shell_group.draw(self.game_ground)
         self.coin_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
+
 
 
 

@@ -7,7 +7,7 @@
 # 程序主要入口
 import pygame
 from source import tools, setup
-from source.states import main_menu,load_screen,level,ask
+from source.states import main_menu,load_screen,level,ask,body_title
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
         'load_screen':load_screen.LoadScreen(),
         'level':level.Level(),
         'ask':ask.Ask(),
-        'game_over':load_screen.GameOver()
+        'body_title':body_title.Body_title()
     }
 
     game = tools.Game(state_dict,'main_menu')

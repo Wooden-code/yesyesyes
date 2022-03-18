@@ -73,7 +73,7 @@ class Level:
 
     def setup_bricks_and_boxes(self):
         self.brick_group=pygame.sprite.Group()
-        self.box_group=pygame.sprite.Group()
+        #self.box_group=pygame.sprite.Group()
         self.coin_group=pygame.sprite.Group()
         self.powerup_group=pygame.sprite.Group()
         self.pipe_and_well_group=pygame.sprite.Group()
@@ -95,14 +95,14 @@ class Level:
                     self.brick_group.add(brick.Brick(x,y,brick_type,self.powerup_group))
 
 
-        if 'box' in self.map_data:
-            for box_data in self.map_data['box']:
-                x, y = box_data['x'], box_data['y']
-                box_type = box_data['type']
-                if box_type == 1:
-                    self.box_group.add(box.Box(x, y, box_type,self.coin_group))
-                else:
-                    self.box_group.add(box.Box(x,y,box_type,self.powerup_group))
+        #if 'box' in self.map_data:
+        #    for box_data in self.map_data['box']:
+         #       x, y = box_data['x'], box_data['y']
+          #      box_type = box_data['type']
+          #      if box_type == 1:
+           #         self.box_group.add(box.Box(x, y, box_type,self.coin_group))
+           #     else:
+           #         self.box_group.add(box.Box(x,y,box_type,self.powerup_group))
 
         if 'words' in self.map_data:
             for coin_data in self.map_data['words']:
@@ -160,7 +160,6 @@ class Level:
             self.succeed()
 
             self.brick_group.update()
-            self.box_group.update()
             self.enemy_group.update(self)
             self.dying_group.update(self)
             self.shell_group.update(self)
@@ -189,7 +188,7 @@ class Level:
             self.check_y_collision()
 
     def check_x_collision(self):#果然这里检测的思路统一比较x坐标 传入的时候则不能用最开始使用的传入方法
-        check_group=pygame.sprite.Group(self.ground_items_group,self.brick_group,self.box_group)#在合一个大的组
+        check_group=pygame.sprite.Group(self.ground_items_group,self.brick_group)#在合一个大的组
 
         collided_sprite=pygame.sprite.spritecollideany(self.player,check_group)#返bool值
         if collided_sprite:#如果碰撞即true
@@ -238,16 +237,11 @@ class Level:
     def check_y_collision(self):
         ground_item=pygame.sprite.spritecollideany(self.player,self.ground_items_group)
         brick=pygame.sprite.spritecollideany(self.player,self.brick_group)
-        box=pygame.sprite.spritecollideany(self.player,self.box_group)
+        #box=pygame.sprite.spritecollideany(self.player,self.box_group)
         enemy=pygame.sprite.spritecollideany(self.player,self.enemy_group)
 
-        if brick and box:
-            to_brick=abs(self.player.rect.centerx-brick.rect.centerx)#离得远则不被处理为None值
-            to_box=abs(self.player.rect.centerx-box.rect.centerx)
-            if to_brick>to_box:
-                brick=None
-            else:
-                box=None
+        if brick :
+            self.adjust_player_y(brick)
 
         pipe_and_well = pygame.sprite.spritecollideany(self.player, self.pipe_and_well_group)
         if pipe_and_well:
@@ -266,8 +260,8 @@ class Level:
             self.adjust_player_y(ground_item)
         elif brick:
             self.adjust_player_y(brick)
-        elif box:
-            self.adjust_player_y(box)
+       #elif box:
+        #    self.adjust_player_y(box)
         elif enemy:
             if self.player.hurt_immune:
                 return
@@ -313,9 +307,9 @@ class Level:
 
             self.is_enemy_on(sprite)
 
-            if sprite.name=='box':
-                if sprite.state=='rest':
-                    sprite.go_bumped()
+            #if sprite.name=='box':
+            #    if sprite.state=='rest':
+            #        sprite.go_bumped()
 
             if sprite.name=='brick':
                 if self.player.big and sprite.brick_type==0:#变大状态且是空砖块
@@ -338,7 +332,7 @@ class Level:
 
     def check_will_fall(self,sprite):
         sprite.rect.y+=1
-        check_group=pygame.sprite.Group(self.ground_items_group,self.brick_group,self.box_group)
+        check_group=pygame.sprite.Group(self.ground_items_group,self.brick_group)
         collided_sprite=pygame.sprite.spritecollideany(sprite,check_group)
         if not collided_sprite and sprite.state!='jump' and not self.is_frozen():
             sprite.state='fall'
@@ -347,7 +341,8 @@ class Level:
     def succeed(self):
 
         if self.player.rect.x>14955:
-            print("ooo")
+            self.player.image=self.player.frames[5]
+            pygame.time.wait(500)
             self.finished=True
             self.next='body_title'
 
@@ -365,7 +360,6 @@ class Level:
         self.game_ground.blit(self.player.image,self.player.rect)#人物也绘制进去
         self.powerup_group.draw(self.game_ground)#改变绘制顺序，才能有蘑菇长出来的效果
         self.brick_group.draw(self.game_ground)#绘制砖块
-        self.box_group.draw(self.game_ground)
         self.enemy_group.draw(self.game_ground)
         self.dying_group.draw(self.game_ground)
         self.shell_group.draw(self.game_ground)

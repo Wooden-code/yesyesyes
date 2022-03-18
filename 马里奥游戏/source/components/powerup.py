@@ -148,7 +148,7 @@ class Fireball(Powerup):
 
 
     def check_y_collision(self, level):
-        check_group = pygame.sprite.Group(level.ground_items_group, level.box_group, level.brick_group)
+        check_group = pygame.sprite.Group(level.ground_items_group, level.brick_group)
         sprite = pygame.sprite.spritecollideany(self, check_group)
         if sprite:
             if self.rect.top < sprite.rect.top:

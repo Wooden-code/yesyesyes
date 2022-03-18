@@ -399,7 +399,7 @@ class Player(pygame.sprite.Sprite):
                 self.hurt_immune_timer=0
 
     def shoot_fireball(self,level):
-         self.frame_index=6#注意这里是发大招的姿势
+         self.frame_index=5#注意这里是发大招的姿势
          if self.current_time-self.last_fireball_timer>300:
             fireball=powerup.Fireball(self.rect.centerx,self.rect.centery,self.face_right)#火球是pygame中的精灵
             level.powerup_group.add(fireball)#把发射火球这个方法传入level中的这个组中

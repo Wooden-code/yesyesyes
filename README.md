@@ -3,6 +3,7 @@
 ###In order to make the player feel the charm of our Chinese font, we represented Chinese characters and their poetry throughout the game and through the unique death mechanic.
 
 ![Image text](./马里奥游戏/resource/graphics/boyu_day_normal_5.png)
+![Image text](./马里奥游戏/resource/graphics/enemy_normal.png)
 ###(building...)
 ##Run the python files "main.py" to start the game and happy hunting!
 ###----------------------------------------------------------------------------------------

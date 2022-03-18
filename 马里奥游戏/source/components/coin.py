@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time : 4:59 下午
-# @Author : 阿童木
-# @File : coin.py
-# @software: PyCharm
+
 import pygame.sprite
 from .. import tools,setup
 from .. import constants as C

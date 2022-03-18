@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time : 5:00 下午
-# @Author : 阿童木
-# @File : player.py
-# @software: PyCharm
+
 import pygame
 from .. import tools,setup
 from .. import constants as C

@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time : 4:59 下午
-# @Author : 阿童木
-# @File : enemy.py
-# @software: PyCharm
+
 
 import pygame
 from .. import setup,tools

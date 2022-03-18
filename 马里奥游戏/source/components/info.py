@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time : 7:12 下午
-# @Author : 阿童木
-# @File : info.py
-# @software: PyCharm
+
 #文字信息
 import pygame
 from .. import constants as C

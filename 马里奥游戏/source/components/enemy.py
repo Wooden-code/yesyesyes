@@ -47,17 +47,18 @@ class Enemy(pygame.sprite.Sprite):
 
     def load_frames(self,name,frame_rects):
         if name=='goomba':#normal
-            for frame_rect in frame_rects:
-                left_frame=tools.get_image(setup.GRAPHICS['enemy_normal.png'],*frame_rect,(0,0,0),C.ENEMY_MULTI)#(0,0,0)指的是抠图背景颜色
-                right_frame=pygame.transform.flip(left_frame,True,False)
-                self.left_frames.append(left_frame)
-                self.right_frames.append(right_frame)
+                self.left_frames=[setup.GRAPHICS['n_enemy_1.png'],setup.GRAPHICS['n_enemy_2.png'],setup.GRAPHICS['n_enemy_3.png'],setup.GRAPHICS['n_enemy_6.png']]
+                self.right_frames=[pygame.transform.flip(setup.GRAPHICS['n_enemy_1.png'],True,False),
+                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_2.png'],True,False),
+                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_3.png'],True,False),
+                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_6.png'],True,False)]
         if name=='koopa':
-            for frame_rect in frame_rects:
-                left_frame=tools.get_image(setup.GRAPHICS['enemy_special.png'],*frame_rect,(0,0,0),C.ENEMY_MULTI)#(0,0,0)指的是抠图背景颜色
-                right_frame=pygame.transform.flip(left_frame,True,False)
-                self.left_frames.append(left_frame)
-                self.right_frames.append(right_frame)
+
+                self.left_frames=[setup.GRAPHICS['enemy1.png'],setup.GRAPHICS['enemy2.png'],setup.GRAPHICS['enemy3.png'],setup.GRAPHICS['enemy6.png']]
+                self.right_frames = [pygame.transform.flip(setup.GRAPHICS['enemy1.png'], True, False),
+                                     pygame.transform.flip(setup.GRAPHICS['enemy2.png'], True, False),
+                                     pygame.transform.flip(setup.GRAPHICS['enemy3.png'], True, False),
+                                     pygame.transform.flip(setup.GRAPHICS['enemy6.png'], True, False)]
 
     def update(self,level):
         self.current_time=pygame.time.get_ticks()
@@ -88,7 +89,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def walk(self):
         if self.current_time-self.timer>125:
-            self.frame_index=(self.frame_index+1)%2
+            self.frame_index=(self.frame_index+1)%3
             self.image=self.frames[self.frame_index]
             self.timer=self.current_time
 
@@ -98,7 +99,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def die(self):
 
-        self.frame_index = 5
+        self.frame_index = 3
         self.image = self.frames[self.frame_index]
 
         if self.current_time - self.death_timer > 80:

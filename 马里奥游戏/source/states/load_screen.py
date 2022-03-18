@@ -25,6 +25,7 @@ class LoadScreen:
         mouse_x, mouse_y = pygame.mouse.get_pos()
         mouse = pygame.mouse.get_pressed()
         tips = setup.GRAPHICS['tips.png']
+        fonts=setup.GRAPHICS['font.png']
         self.setup_background()
         surface.blit(self.background, self.viewport)
         LoadScreen.angle = wrap_angle(LoadScreen.angle - 1)
@@ -33,6 +34,7 @@ class LoadScreen:
         if 209 < mouse_x < 289 and 313 < mouse_y < 519:
             if mouse == (0, 0, 0):
                 surface.blit(rtips, (208, 295))
+                surface.blit(fonts,(300,50))
                 surface.blit(tips, (843 - 42, 300))
                 surface.blit(tips, (565 - 42, 337))
                 pygame.display.update()

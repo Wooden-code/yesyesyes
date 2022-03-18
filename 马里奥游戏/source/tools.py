@@ -72,15 +72,18 @@ class Game:
 def load_graphics(path):
         graphics = {}
         for pic in os.listdir(path):
+            try :
 
 
-            img = pygame.image.load(os.path.join(path, pic))
-            if img.get_alpha():  # 如果是透明底的
+                 img = pygame.image.load(os.path.join(path, pic))
+                 if img.get_alpha():  # 如果是透明底的
 
-                img = img.convert_alpha()
-            else:
-                img = img.convert_alpha()
-            graphics[pic] = img
+                     img = img.convert_alpha()
+                 else:
+                     img = img.convert_alpha()
+                 graphics[pic] = img
+            except:
+                pass
         return graphics
 
 

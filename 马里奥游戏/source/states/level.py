@@ -33,7 +33,7 @@ class Level:
         file_path=os.path.join('source/data/maps',file_name)
         with open(file_path) as f:
             self.map_data = json.load(f)
-        pygame.mixer.music.load(os.path.abspath("resource/music/渔舟唱晚.ogg"))  # 方法问题
+        pygame.mixer.music.load(os.path.abspath("resource/music/main.ogg"))  # 方法问题
         pygame.mixer.music.set_volume(1.0)  # 设置音量
         pygame.mixer.music.play(-1)  # 循环播放
 

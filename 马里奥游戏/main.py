@@ -28,4 +28,7 @@ def main():
 
 
 if __name__ == '__main__':
+    pygame.mixer.music.load(os.path.abspath("resource/music/start.ogg"))  # 方法问题
+    pygame.mixer.music.set_volume(1.0)  # 设置音量
+    pygame.mixer.music.play(-1)
     main()

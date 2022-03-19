@@ -71,18 +71,26 @@ class Player(pygame.sprite.Sprite):
         boyu_day_normal_7 = setup.GRAPHICS['boyu_day_normal_7.png']
         boyu_day_normal_8 = setup.GRAPHICS['boyu_day_normal_8.png']
 
+        boyu_day_special_1 = setup.GRAPHICS['boyu_day_special_1.png']
+        boyu_day_special_2 = setup.GRAPHICS['boyu_day_special_2.png']
+        boyu_day_special_3 = setup.GRAPHICS['boyu_day_special_3.png']
+        boyu_day_special_4 = setup.GRAPHICS['boyu_day_special_4.png']
+        boyu_day_special_5 = setup.GRAPHICS['boyu_day_special_5.png']
+        boyu_day_special_6 = setup.GRAPHICS['boyu_day_special_6.png']
+        boyu_day_special_7 = setup.GRAPHICS['boyu_day_special_7.png']
+        boyu_day_special_8 = setup.GRAPHICS['boyu_day_special_8.png']
+
         boyu_night_normal=setup.GRAPHICS['boyu_night_normal.png']
-        boyu_day_special=setup.GRAPHICS['boyu_day_special.png']
         boyu_night_special=setup.GRAPHICS['boyu_night_special.png']
         frame_rects = self.player_data['image_frames']
 
         self.right_day_normal_frames = [boyu_day_normal_1,boyu_day_normal_2,boyu_day_normal_3,boyu_day_normal_4,boyu_day_normal_5,boyu_day_normal_6,boyu_day_normal_7,boyu_day_normal_8]#区分开来的格格帧库 最底层
         self.right_night_normal_frames = []
-        self.right_day_special_frames = []
+        self.right_day_special_frames = [boyu_day_special_1,boyu_day_special_2,boyu_day_special_3,boyu_day_special_4,boyu_day_special_5,boyu_day_special_6,boyu_day_special_7,boyu_day_special_8]
         self.right_night_special_frames=[]
         self.left_day_normal_frames = [pygame.transform.flip(boyu_day_normal_1, True, False),pygame.transform.flip(boyu_day_normal_2, True, False),pygame.transform.flip(boyu_day_normal_3, True, False),pygame.transform.flip(boyu_day_normal_4, True, False),pygame.transform.flip(boyu_day_normal_5, True, False),pygame.transform.flip(boyu_day_normal_6, True, False),pygame.transform.flip(boyu_day_normal_7, True, False),pygame.transform.flip(boyu_day_normal_8, True, False)]
         self.left_night_normal_frames = []
-        self.left_day_special_frames = []
+        self.left_day_special_frames = [pygame.transform.flip(boyu_day_special_1,True,False),pygame.transform.flip(boyu_day_special_2,True,False),pygame.transform.flip(boyu_day_special_3,True,False),pygame.transform.flip(boyu_day_special_4,True,False),pygame.transform.flip(boyu_day_special_5,True,False),pygame.transform.flip(boyu_day_special_6,True,False),pygame.transform.flip(boyu_day_special_7,True,False),pygame.transform.flip(boyu_day_special_8,True,False)]
         self.left_night_special_frames=[]
 
         self.day_normal_frames=[self.right_day_normal_frames,self.left_day_normal_frames]
@@ -117,12 +125,7 @@ class Player(pygame.sprite.Sprite):
                     self.right_night_normal_frames.append(right_image)
                     self.left_night_normal_frames.append(left_image)
                 if group=='right_day_special':
-                    right_image = tools.get_image(boyu_day_special, frame_rect['x'], frame_rect['y'],
-                                                  frame_rect['width'],
-                                                  frame_rect['height'], (0, 0, 0), C.PLAYER_MULTI)
-                    left_image = pygame.transform.flip(right_image, True, False)
-                    self.right_day_special_frames.append(right_image)
-                    self.left_day_special_frames.append(left_image)
+                    pass
                 if group=='right_night_special':
                     right_image = tools.get_image(boyu_night_special, frame_rect['x'], frame_rect['y'],
                                                   frame_rect['width'],
@@ -338,7 +341,8 @@ class Player(pygame.sprite.Sprite):
     def big2small(self,keys):
         frame_dur=100
         sizes=[2,1,0,1,0,1,0,1,0,1,0]#0 small 1 medium 2 big
-        frames_and_idx=[(self.day_normal_frames,7),(self.day_special_frames,7),(self.day_special_frames,4)]
+        # frames_and_idx=[(self.day_normal_frames,7),(self.day_special_frames,7),(self.day_special_frames,4)]
+        frames_and_idx = [(self.day_special_frames, 0), (self.day_special_frames, 7), (self.day_normal_frames, 0)]
         if self.transition_timer==0:
             self.big=False
             self.transition_timer=self.current_time

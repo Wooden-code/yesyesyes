@@ -105,8 +105,8 @@ class Level:
 
         if 'words' in self.map_data:
             for coin_data in self.map_data['words']:
-                x,y=coin_data['x'],coin_data['y']
-                self.coin_group.add(coin.Coin(x,y,None,None))
+                x,y,type=coin_data['x'],coin_data['y'],coin_data['type']
+                self.coin_group.add(coin.Coin(x,y,type,None))
 
         if 'pipe_and_well' in self.map_data:
             for pipe_data in self.map_data['pipe_and_well']:
@@ -154,7 +154,6 @@ class Level:
             self.check_checkpoints()
             self.check_if_go_die()
             self.update_game_window()
-            self.info.update()
             self.succeed()
 
             self.brick_group.update()
@@ -163,6 +162,8 @@ class Level:
             self.shell_group.update(self)
             self.coin_group.update()
             self.powerup_group.update(self)  # 将level实例传给这个函数
+
+            self.info.update(surface)
 
 
         self.draw(surface)
@@ -247,6 +248,9 @@ class Level:
 
         word=pygame.sprite.spritecollideany(self.player,self.coin_group)
         if word:
+
+            self.game_info['num']+=1
+            print(self.game_info['num'])
             word.kill()
 
 
@@ -363,6 +367,7 @@ class Level:
         self.shell_group.draw(self.game_ground)
         self.coin_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
+        self.info.draw(surface)
 
 
 

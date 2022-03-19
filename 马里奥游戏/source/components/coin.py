@@ -39,23 +39,33 @@ class FlashingCoin(pygame.sprite.Sprite):#引入这个精灵方法
         self.image = self.frames[self.frame_index]
 
 class Coin(pygame.sprite.Sprite):
-    def __init__(self, x, y, coin_type, group, name='coin'):
+    def __init__(self, x, y, type, name='coin'):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
-        self.coin_type = coin_type
-        self.group = group
+        self.type = type
+
         self.name = name
 
-        self.frame_rects =[(1,160,5,8),(9,160,5,8),(17,160,5,8),(9,160,5,8)]
 
-        self.frames = []
-        for frame_rect in self.frame_rects:
-            self.frames.append(tools.get_image(setup.GRAPHICS['words.png'], *frame_rect, (0, 0, 0), C.BRICK_MULTI))
 
-        self.frame_index = 0
-        self.image = self.frames[self.frame_index]
+
+        if self.type==0:
+            self.image=setup.GRAPHICS['sentence1.png']
+        if self.type == 1:
+            self.image=setup.GRAPHICS['sentence2.png']
+        if self.type == 2:
+            self.image=setup.GRAPHICS['sentence3.png']
+        if self.type == 3:
+            self.image=setup.GRAPHICS['sentence4.png']
+        if self.type == 4:
+            self.image=setup.GRAPHICS['sentence5.png']
+        if self.type == 5:
+            self.image=setup.GRAPHICS['sentence6.png']
+        if self.type == 6:
+            self.image=setup.GRAPHICS['sentence7.png']
         self.rect = self.image.get_rect()
+
         self.rect.x = self.x
         self.rect.y = self.y
         self.gravity = C.GRAVITY

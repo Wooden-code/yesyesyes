@@ -19,7 +19,7 @@ class MainMenu:
         game_info={
             'score':0,
             'coin':0,
-            'lives':3,
+            'num':0,
             'player_state':'small'#大的还是小的什么的
 
         }
@@ -101,7 +101,7 @@ class MainMenu:
         self.game_info.update({
             'score':0,
             'coin':0,
-            'lives':3,
+            'num':0,
             'player_state':0
 
         })

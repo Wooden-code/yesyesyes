@@ -80,7 +80,7 @@ class Ask:
         if check_right == 8:
             print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
             #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
-            self.background.blit(self.frames_answer[self.num],(0,0))
+            self.background.blit(self.frames_answer[self.num],(-2,-65))
 
             if self.curTime == None:
                 self.curTime = pygame.time.get_ticks()

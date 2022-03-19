@@ -5,8 +5,8 @@
 # @software: PyCharm
 
 # 程序主要入口
-import pygame
-from source import tools, setup
+import pygame,os
+from source import tools, setup,sound
 from source.states import main_menu,load_screen,level,ask,body_title
 
 

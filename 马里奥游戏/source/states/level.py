@@ -1,8 +1,4 @@
-# -*- coding = utf-8 -*-
-# @Time : 5:03 下午
-# @Author : 阿童木
-# @File : level.py
-# @software: PyCharm
+
 import pygame
 from ..components import info
 from .. import setup,tools,sound
@@ -37,6 +33,9 @@ class Level:
         file_path=os.path.join('source/data/maps',file_name)
         with open(file_path) as f:
             self.map_data = json.load(f)
+        pygame.mixer.music.load(os.path.abspath("resource/music/渔舟唱晚.ogg"))  # 方法问题
+        pygame.mixer.music.set_volume(1.0)  # 设置音量
+        pygame.mixer.music.play(-1)  # 循环播放
 
     def setup_background(self):
         self.image_name=self.map_data['image_name']
@@ -143,7 +142,6 @@ class Level:
     def update(self,surface,keys):#调用玩家的更新方法 将键盘动作传入
 
         self.player.update(keys,self)#自身self就是level
-        sound.Music_BG.update(self, surface, keys)
 
         if self.player.dead:
             if pygame.time.get_ticks()-self.player.death_timer>3000:#获取当前时间 死了三秒以上则结束游戏

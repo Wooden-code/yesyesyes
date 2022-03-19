@@ -1,5 +1,5 @@
 
-import pygame
+import pygame,os
 from .. import setup,tools
 from ..components import enemy,player
 from .. import constants as C
@@ -103,6 +103,7 @@ class Fireball(Powerup):
         self.y_vel=0
 
         self.timer=0
+        pygame.mixer.Sound(os.path.abspath("resource/music/test1.ogg")).play()
 
 
 

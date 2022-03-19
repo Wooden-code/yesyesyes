@@ -17,15 +17,14 @@ class Powerup(pygame.sprite.Sprite):
         self.frames=[]
         self.frame_index=0
         if name=='fireball':
-            for frame_rect in frame_rects:
-                self.frames.append(tools.get_image(setup.GRAPHICS['item_objects.png'],*frame_rect,(0,0,0),2.5))
+            self.frames=[setup.GRAPHICS['yy_1.png'],setup.GRAPHICS['yy_2.png'],setup.GRAPHICS['yy_3.png'],setup.GRAPHICS['yy_4.png']]
         elif name=='slj':
             self.frames = [setup.GRAPHICS['slj1.png'], setup.GRAPHICS['slj2.png']]
         self.image=self.frames[self.frame_index]
         self.rect=self.image.get_rect()
         self.rect.centerx=centerx
         self.rect.centery=centery
-        self.origin_y=centery-self.rect.height/2
+        self.origin_y=centery-self.rect.height/2+10
 
         self.x_vel=0
         self.direction=1#向右
@@ -119,12 +118,12 @@ class Fireball(Powerup):
             self.update_position(level)
         elif self.state=='boom':
             if self.current_time-self.timer>50:
-                if self.frame_index<6:
-                    self.frame_index+=1
-                    self.timer=self.current_time
-                    self.image=self.frames[self.frame_index]
+                if self.frame_index<4:
+                   self.frame_index+=1
+                   self.timer=self.current_time
+                   self.image=self.frames[self.frame_index]
                 else:
-                    self.kill()
+                   self.kill()
 
 
 

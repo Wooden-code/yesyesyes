@@ -62,6 +62,12 @@ class LoadScreen:
                 pygame.display.update()
             elif mouse == (1, 0, 0):
                 self.finished=True
+        elif 560 < mouse_x < 640 and 800 < mouse_y < 1000:
+            surface.blit(tips_3, (841, 300))
+            surface.blit(tips_2, (560, 330))
+            surface.blit(tips_1, (218, 295))
+            if mouse == (1, 0, 0):
+                pygame.exit()
         else:
             surface.blit(tips_3, (841, 300))
             surface.blit(tips_2, (560, 330))

@@ -26,8 +26,14 @@ class Ask:
         self.ask0 = setup.GRAPHICS['question1.png']
         self.ask1 = setup.GRAPHICS['question2.png']
         self.ask2 = setup.GRAPHICS['question3.png']
-        self.yes = setup.GRAPHICS['right.png']
-        self.no=setup.GRAPHICS['wrong.png']
+
+        self.answer1=setup.GRAPHICS['answer1.png']
+        self.answer2=setup.GRAPHICS['answer2.png']
+        self.answer3 = setup.GRAPHICS['answer3.png']
+
+        self.frames_answer=[self.answer1,self.answer2,self.answer3]
+
+
 
         # self.ask6 = setup.GRAPHICS['ask_6.png']
         self.frames = [self.ask0, self.ask1, self.ask2]
@@ -73,12 +79,8 @@ class Ask:
         print(check_right)
         if check_right == 8:
             print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
-            for i in range(0,4):
-                print("yyy")
-                if i==self.num:
-                    self.background.blit(self.yes,((self.answer_rects[self.num])[0]-450,(self.answer_rects[self.num])[0]-179.5))
-                elif i!=self.num:
-                    self.background.blit(self.no,((self.answer_rects[i])[0]-450,(self.answer_rects[i])[0]-179.5))
+            #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
+            self.background.blit(self.frames_answer[self.num],(0,0))
 
             if self.curTime == None:
                 self.curTime = pygame.time.get_ticks()

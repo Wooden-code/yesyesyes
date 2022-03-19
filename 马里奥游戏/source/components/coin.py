@@ -39,31 +39,49 @@ class FlashingCoin(pygame.sprite.Sprite):#引入这个精灵方法
         self.image = self.frames[self.frame_index]
 
 class Coin(pygame.sprite.Sprite):
-    def __init__(self, x, y, type, name='coin'):
+    def __init__(self, x, y, type,group, name='coin'):
         pygame.sprite.Sprite.__init__(self)
         self.x = x
         self.y = y
         self.type = type
-
+        self.group=group
         self.name = name
 
 
 
-
-        if self.type==0:
-            self.image=setup.GRAPHICS['sentence1.png']
-        if self.type == 1:
-            self.image=setup.GRAPHICS['sentence2.png']
-        if self.type == 2:
-            self.image=setup.GRAPHICS['sentence3.png']
-        if self.type == 3:
-            self.image=setup.GRAPHICS['sentence4.png']
-        if self.type == 4:
-            self.image=setup.GRAPHICS['sentence5.png']
-        if self.type == 5:
-            self.image=setup.GRAPHICS['sentence6.png']
-        if self.type == 6:
-            self.image=setup.GRAPHICS['sentence7.png']
+        if self.group==0:
+            if self.type==0 :
+                self.image=setup.GRAPHICS['sentence1.png']
+            if self.type == 1 :
+                self.image=setup.GRAPHICS['sentence2.png']
+            if self.type == 2 :
+                self.image=setup.GRAPHICS['sentence3.png']
+            if self.type == 3:
+                self.image=setup.GRAPHICS['sentence4.png']
+            if self.type == 4:
+                self.image=setup.GRAPHICS['sentence5.png']
+            if self.type == 5:
+                self.image=setup.GRAPHICS['sentence6.png']
+            if self.type == 6:
+                self.image=setup.GRAPHICS['sentence7.png']
+        elif self.group==1:
+            if self.type==0:
+                self.image=setup.GRAPHICS['ji_1.png']
+            if self.type==1:
+                self.image=setup.GRAPHICS['ji_2.png']
+            if self.type==2:
+                self.image=setup.GRAPHICS['ji_3.png']
+            if self.type==3:
+                self.image=setup.GRAPHICS['ji_4.png']
+        elif self.group==2:
+            if self.type==0:
+                self.image=setup.GRAPHICS['shi_1.png']
+            if self.type==1:
+                self.image=setup.GRAPHICS['shi_2.png']
+            if self.type==2:
+                self.image=setup.GRAPHICS['shi_3.png']
+            if self.type==3:
+                self.image=setup.GRAPHICS['shi_4.png']
         self.rect = self.image.get_rect()
 
         self.rect.x = self.x

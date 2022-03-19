@@ -68,13 +68,13 @@ class Info:
         #label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))  # 放大产生锯齿效果
         #return label_image
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
-
-        #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
+        print('x  {}'.format(self.game_info['num']))
+        surface.blit(self.state_labels[0][0], self.state_labels[0][1])
 
 
     def draw(self,surface):#绘画
-        print('x  {}'.format(self.game_info['num']))
-        surface.blit(self.state_labels[0][0], self.state_labels[0][1])
+        pass
+        #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
         #print(self.state_labels[0][0],self.state_labels[0][1])
         #for label in self.state_labels:
         #    surface.blit(label[0],label[1])#用blit方法画出来 对应 图片，位置

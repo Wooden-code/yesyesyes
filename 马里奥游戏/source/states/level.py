@@ -344,7 +344,7 @@ class Level:
 
         if self.player.rect.x>14955:
             self.player.image=self.player.frames[5]
-            pygame.time.wait(500)
+            pygame.time.wait(5000)
             self.finished=True
             self.next='body_title'
 

@@ -1,8 +1,3 @@
-# -*- coding = utf-8 -*-
-# @Time : 5:04 下午
-# @Author : 阿童木
-# @File : constants.py
-# @software: PyCharm
 SCREEN_W,SCREEN_H=1200,900
 SCREEN_SIZE=(SCREEN_W,SCREEN_H)
 GROUND_HEIGHT=SCREEN_H-60

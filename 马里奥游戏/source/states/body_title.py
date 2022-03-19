@@ -32,9 +32,6 @@ class Body_title:
     def update(self,surface,keys):
         surface.blit(self.background, self.background_rect)
 
-        if keys[pygame.K_SPACE]:
-                self.finished=True
-                self.next='load_screen'
-        elif keys[pygame.K_BACKSPACE]:
+        if keys[pygame.K_KP_ENTER]:
                 self.finished=True
                 self.next='load_screen'

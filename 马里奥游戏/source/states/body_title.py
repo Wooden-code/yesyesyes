@@ -9,7 +9,6 @@ import random
 
 class Body_title:
     instance = None
-    expanded_i = 1
     def __init__(self):
         game_info = {
             'score': 0,
@@ -26,13 +25,16 @@ class Body_title:
         self.background = pygame.transform.scale(self.background, (
             int(self.background_rect.width * 0.46), int(self.background_rect.height *0.57)))
         self.game_info=game_info
-
-        print("aaa")
         self.time=pygame.time.get_ticks()
 
         self.finished=False
         self.next='load_screen'
     def update(self,surface,keys):
         surface.blit(self.background, self.background_rect)
-        if pygame.time.get_ticks()-self.time>7000:
-            self.finished=True
+
+        if keys[pygame.K_SPACE]:
+                self.finished=True
+                self.next='load_screen'
+        elif keys[pygame.K_BACKSPACE]:
+                self.finished=True
+                self.next='load_screen'

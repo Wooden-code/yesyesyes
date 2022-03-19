@@ -10,22 +10,15 @@ class Pipe_and_well(pygame.sprite.Sprite):
         self.type = type
         self.group = group
         self.name = name
-        self.pipe_frame_rects =(242.7,235.5,340,358.7)
-        self.well_frame_rects = (242.7, 235.5, 340, 358.7)
+
 
 
         self.frames=[]
-        self.frames.append(setup.GRAPHICS['pipe.png'])
 
-        self.frames.append(setup.GRAPHICS['well.png'])
         self.frames.append(setup.GRAPHICS['pavilion.png'])
 
-        if self.type==0:
-            self.image = self.frames[self.type]
-        elif self.type==1:
-            self.image=self.frames[self.type]
-        elif self.type==2:
-            self.image=self.frames[self.type]
+
+        self.image=self.frames[0]
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x

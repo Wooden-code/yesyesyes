@@ -20,7 +20,12 @@ class Brick(pygame.sprite.Sprite):
 
 
         self.frame_index=0
-        self.image= setup.GRAPHICS['bamboo.png']
+        if self.brick_type==0:
+            self.image= setup.GRAPHICS['bamboo.png']
+        elif self.brick_type==1:
+            self.image=setup.GRAPHICS['well.png']
+        elif self.brick_type==2:
+            self.image=setup.GRAPHICS['pipe.png']
         self.rect=self.image.get_rect()
         self.rect.x=self.x
         self.rect.y=self.y

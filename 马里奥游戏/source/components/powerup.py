@@ -1,5 +1,5 @@
 
-import pygame
+import pygame,os
 from .. import setup,tools
 from ..components import enemy,player
 from .. import constants as C
@@ -20,8 +20,7 @@ class Powerup(pygame.sprite.Sprite):
             for frame_rect in frame_rects:
                 self.frames.append(tools.get_image(setup.GRAPHICS['item_objects.png'],*frame_rect,(0,0,0),2.5))
         elif name=='slj':
-            for frame_rect in frame_rects:
-                self.frames.append(tools.get_image(setup.GRAPHICS['slj_and_cloud.png'],*frame_rect,(255,255,255),0.15))
+            self.frames = [setup.GRAPHICS['slj1.png'], setup.GRAPHICS['slj2.png']]
         self.image=self.frames[self.frame_index]
         self.rect=self.image.get_rect()
         self.rect.centerx=centerx
@@ -104,6 +103,7 @@ class Fireball(Powerup):
         self.y_vel=0
 
         self.timer=0
+        pygame.mixer.Sound(os.path.abspath("resource/music/test1.ogg")).play()
 
 
 
@@ -160,6 +160,7 @@ class Slj(Powerup):
     def __init__(self, centerx, centery, direction):
         self.name = 'slj'
         frame_rects = [(84.7,115.9,187,154.5),(291,127.8,153,154),(546.8,139.68,138.2,142.6)]
+
         Powerup.__init__(self, centerx, centery, frame_rects,self.name)
         self.name = 'slj'
         self.state = 'fly'
@@ -176,7 +177,7 @@ class Slj(Powerup):
             self.y_vel = 0
             if self.current_time - self.timer > 200:
                 self.frame_index += 1
-                self.frame_index %= 3
+                self.frame_index %= 2
                 self.timer = self.current_time
                 self.image = self.frames[self.frame_index]  # 让火球旋转起来
             self.update_position(level)

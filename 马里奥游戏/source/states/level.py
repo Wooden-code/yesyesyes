@@ -33,7 +33,7 @@ class Level:
         file_path=os.path.join('source/data/maps',file_name)
         with open(file_path) as f:
             self.map_data = json.load(f)
-        pygame.mixer.music.load(os.path.abspath("resource/music/渔舟唱晚.ogg"))  # 方法问题
+        pygame.mixer.music.load(os.path.abspath("resource/music/main.ogg"))  # 方法问题
         pygame.mixer.music.set_volume(1.0)  # 设置音量
         pygame.mixer.music.play(-1)  # 循环播放
 
@@ -73,9 +73,10 @@ class Level:
     def setup_bricks_and_boxes(self):
         self.brick_group=pygame.sprite.Group()
         #self.box_group=pygame.sprite.Group()
-        self.coin_group=pygame.sprite.Group()
+        self.coin_sentence_group=pygame.sprite.Group()
         self.powerup_group=pygame.sprite.Group()
         self.pipe_and_well_group=pygame.sprite.Group()
+        self.coin_buff_group=pygame.sprite.Group()
 
 
         if 'brick' in self.map_data:
@@ -88,8 +89,8 @@ class Level:
                         pass
                     else:
                         self.brick_group.add(brick.Brick(x,y,brick_type,None))#add应该就是添加class的这种
-                elif brick_type==1:
-                    self.brick_group.add(brick.Brick(x,y,brick_type,self.coin_group))
+                #elif brick_type==1:
+                #    self.brick_group.add(brick.Brick(x,y,brick_type,self.coin_group))
                 else:
                     self.brick_group.add(brick.Brick(x,y,brick_type,self.powerup_group))
 
@@ -105,8 +106,11 @@ class Level:
 
         if 'words' in self.map_data:
             for coin_data in self.map_data['words']:
-                x,y=coin_data['x'],coin_data['y']
-                self.coin_group.add(coin.Coin(x,y,None,None))
+                x,y,type,group=coin_data['x'],coin_data['y'],coin_data['type'],coin_data['group']
+                if group==0 or type!=3:
+                    self.coin_sentence_group.add(coin.Coin(x,y,type,group))
+                else:
+                    self.coin_buff_group.add(coin.Coin(x,y,type,group))
 
         if 'pipe_and_well' in self.map_data:
             for pipe_data in self.map_data['pipe_and_well']:
@@ -154,15 +158,17 @@ class Level:
             self.check_checkpoints()
             self.check_if_go_die()
             self.update_game_window()
-            self.info.update()
             self.succeed()
 
             self.brick_group.update()
             self.enemy_group.update(self)
             self.dying_group.update(self)
             self.shell_group.update(self)
-            self.coin_group.update()
+            self.coin_sentence_group.update()
+            self.coin_buff_group.update()
             self.powerup_group.update(self)  # 将level实例传给这个函数
+
+            self.info.update(surface)
 
 
         self.draw(surface)
@@ -218,11 +224,20 @@ class Level:
         powerup=pygame.sprite.spritecollideany(self.player,self.powerup_group)
         if powerup:
             if powerup.name=='slj':
-                self.player.go_die()
-                powerup.kill()
+                if self.player.big:
+                    self.player.state = 'big2small'
+                    self.player.hurt_immune = True
+                else:
+                    self.player.go_die()
+                    powerup.kill()
             if powerup.name=='mushroom':
                 self.player.state='small2big'
                 powerup.kill()
+        buff=pygame.sprite.spritecollideany(self.player,self.coin_buff_group)
+
+        if  buff:
+            self.player.state='small2big'
+            buff.kill()
 
         pipe_and_well=pygame.sprite.spritecollideany(self.player,self.pipe_and_well_group)
         if pipe_and_well:
@@ -245,8 +260,11 @@ class Level:
         if pipe_and_well:
             self.adjust_player_y(pipe_and_well)
 
-        word=pygame.sprite.spritecollideany(self.player,self.coin_group)
+        word=pygame.sprite.spritecollideany(self.player,self.coin_sentence_group)
         if word:
+
+            self.game_info['num']+=1
+            print(self.game_info['num'])
             word.kill()
 
 
@@ -340,7 +358,7 @@ class Level:
 
         if self.player.rect.x>14955:
             self.player.image=self.player.frames[5]
-            pygame.time.wait(500)
+            pygame.time.wait(5000)
             self.finished=True
             self.next='body_title'
 
@@ -361,8 +379,10 @@ class Level:
         self.enemy_group.draw(self.game_ground)
         self.dying_group.draw(self.game_ground)
         self.shell_group.draw(self.game_ground)
-        self.coin_group.draw(self.game_ground)
+        self.coin_sentence_group.draw(self.game_ground)
+        self.coin_buff_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
+        self.info.draw(surface)
 
 
 

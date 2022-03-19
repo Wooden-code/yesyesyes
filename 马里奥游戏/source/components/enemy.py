@@ -80,7 +80,7 @@ class Enemy(pygame.sprite.Sprite):
             self.image=self.left_frames[self.frame_index]
 
     def can_shoot_or_not(self, level):
-        if self.rect.x-level.player.rect.x>300:
+        if self.rect.x-level.player.rect.x>900:
             self.can_shoot = True
 
     def walk(self):

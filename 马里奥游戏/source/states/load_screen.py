@@ -24,26 +24,48 @@ class LoadScreen:
     def update(self,surface,keys):
         mouse_x, mouse_y = pygame.mouse.get_pos()
         mouse = pygame.mouse.get_pressed()
-        tips = setup.GRAPHICS['tips.png']
-        fonts=setup.GRAPHICS['font.png']
+        tips_3 = setup.GRAPHICS['tips_3.png']
+        tips_2 = setup.GRAPHICS['tips_2.png']
+        tips_1 = setup.GRAPHICS['tips_1.png']
+        fonts_1=setup.GRAPHICS['font.png']
         self.setup_background()
         surface.blit(self.background, self.viewport)
         LoadScreen.angle = wrap_angle(LoadScreen.angle - 1)
-        rtips=pygame.transform.rotate(tips, abs(math.sin(math.radians(LoadScreen.angle))*10))
+        rtips_1=pygame.transform.rotate(tips_1, abs(math.sin(math.radians(LoadScreen.angle))*10))
+        rtips_2=pygame.transform.rotate(tips_2, abs(math.sin(math.radians(LoadScreen.angle))*10))
+        rtips_3=pygame.transform.rotate(tips_3, abs(math.sin(math.radians(LoadScreen.angle))*10))
         print(pygame.mouse.get_pos())
         if 209 < mouse_x < 289 and 313 < mouse_y < 519:
             if mouse == (0, 0, 0):
-                surface.blit(rtips, (208, 295))
-                surface.blit(fonts,(300,50))
-                surface.blit(tips, (843 - 42, 300))
-                surface.blit(tips, (565 - 42, 337))
+                surface.blit(rtips_1, (218, 295))
+                surface.blit(fonts_1,(330,50))
+                surface.blit(tips_3, (841, 300))
+                surface.blit(tips_2, (560, 330))
+                pygame.display.update()
+            elif mouse == (1, 0, 0):
+                self.finished=True
+        elif 560 < mouse_x < 640 and 343 < mouse_y < 549:
+            if mouse == (0, 0, 0):
+                surface.blit(rtips_2, (560, 330))
+                surface.blit(fonts_1,(330,50))
+                surface.blit(tips_3, (841, 300))
+                surface.blit(tips_1, (218, 295))
+                pygame.display.update()
+            elif mouse == (1, 0, 0):
+                self.finished=True
+        elif 841 < mouse_x < 921 and 313 < mouse_y < 519:
+            if mouse == (0, 0, 0):
+                surface.blit(rtips_3, (841, 300))
+                surface.blit(fonts_1,(330,50))
+                surface.blit(tips_2, (560, 330))
+                surface.blit(tips_1, (218, 295))
                 pygame.display.update()
             elif mouse == (1, 0, 0):
                 self.finished=True
         else:
-            surface.blit(tips, (843-42, 300))
-            surface.blit(tips, (565-42, 337))
-            surface.blit(tips, (208, 295))
+            surface.blit(tips_3, (841, 300))
+            surface.blit(tips_2, (560, 330))
+            surface.blit(tips_1, (218, 295))
 
 
 

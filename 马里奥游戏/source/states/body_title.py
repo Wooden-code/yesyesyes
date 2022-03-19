@@ -31,10 +31,10 @@ class Body_title:
         self.next='load_screen'
     def update(self,surface,keys):
         surface.blit(self.background, self.background_rect)
-        for event in pygame.event.get():  # 捕获键盘事件
-            if event.type == pygame.K_SPACE:
+
+        if keys[pygame.K_SPACE]:
                 self.finished=True
                 self.next='load_screen'
-            elif event.type == pygame.K_BACKSPACE:
+        elif keys[pygame.K_BACKSPACE]:
                 self.finished=True
                 self.next='load_screen'

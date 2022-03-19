@@ -32,6 +32,10 @@ class MainMenu:
             self.paint3 = setup.GRAPHICS['paint_3.png']
             self.paint4 = setup.GRAPHICS['paint_4.png']
             self.paint5 = setup.GRAPHICS['paint_5.png']
+            self.yyt=setup.GRAPHICS['yyt.png']
+            self.lmt=setup.GRAPHICS['lmt.png']
+            self.tyj=setup.GRAPHICS['tyj.png']
+            self.lxr=setup.GRAPHICS['lxr.png']
             self.info = info.Info('main_menu', self.game_info)
             self.finished = False  # 只要这个阶段还在运行就不完结
             self.next = 'load_screen'  # 载入游戏阶段 也就是这里对应的下一阶段

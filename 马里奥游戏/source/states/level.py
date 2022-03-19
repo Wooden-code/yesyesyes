@@ -224,8 +224,12 @@ class Level:
         powerup=pygame.sprite.spritecollideany(self.player,self.powerup_group)
         if powerup:
             if powerup.name=='slj':
-                self.player.go_die()
-                powerup.kill()
+                if self.player.big:
+                    self.player.state = 'big2small'
+                    self.player.hurt_immune = True
+                else:
+                    self.player.go_die()
+                    powerup.kill()
             if powerup.name=='mushroom':
                 self.player.state='small2big'
                 powerup.kill()

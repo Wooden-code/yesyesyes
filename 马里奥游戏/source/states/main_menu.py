@@ -4,7 +4,7 @@
 # @File : main_menu.py.py
 # @software: PyCharm
 
-import pygame
+import pygame,math
 from .. import setup  # ..是上一级文件
 from .. import tools
 from .. import constants as C
@@ -14,6 +14,7 @@ from ..components import info  # 到上一级目录平行的components
 class MainMenu:
     instance = None
     expanded_i = 1
+    walk=60
 
     def __init__(self):
         game_info={
@@ -73,8 +74,9 @@ class MainMenu:
                 self.finished=True
             elif self.cursor.state=='2P':
                 self.finished=True
-
+        self.welldone=tools.button(100, 100, 300, 300)
         self.check_if = tools.button(592, 653, 654, 759)
+
 
     def update(self, surface, keys):  # 更新操作
         self.update_cursor(keys)  # 上面的更新也会作为这里更新的一部分
@@ -96,6 +98,13 @@ class MainMenu:
             surface.blit(self.paint5, (462, 650))
         else:
             surface.blit(self.paint1, (582, 650))
+
+        if self.welldone == 10 and MainMenu.expanded_i != 6:
+            surface.blit(self.tyj,(MainMenu.walk, abs(math.sin(math.radians(MainMenu.walk))*100)))
+            surface.blit(self.lmt, (400, 100))
+            surface.blit(self.lxr,(100,400))
+            surface.blit(self.yyt, (400, 400))
+        MainMenu.walk+=1
 
     def reset_game_info(self):
         self.game_info.update({

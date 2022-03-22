@@ -100,8 +100,8 @@ class MainMenu:
             surface.blit(self.paint1, (582, 650))
 
         if self.welldone == 10 and MainMenu.expanded_i != 6:
-            surface.blit(self.tyj,(MainMenu.walk, abs(math.sin(math.radians(MainMenu.walk))*100)))
-            surface.blit(self.lmt, (400, 100))
+            surface.blit(self.tyj,((math.sin(math.radians(MainMenu.walk))*400+487), abs(math.sin(math.radians(MainMenu.walk))*646)))
+            surface.blit(self.lmt, (1000-(math.sin(math.radians(MainMenu.walk))*400+487), 700-abs(math.sin(math.radians(MainMenu.walk))*646)))
             surface.blit(self.lxr,(100,400))
             surface.blit(self.yyt, (400, 400))
         MainMenu.walk+=1

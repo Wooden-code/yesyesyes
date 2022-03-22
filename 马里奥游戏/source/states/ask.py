@@ -72,7 +72,7 @@ class Ask:
         print(pygame.mouse.get_pos())
         if self.curTime!=None:
             if pygame.time.get_ticks() - self.curTime > 8000:
-                # pygame.time.delay(3000)
+
                 self.finished = True
                 self.next = 'level'
                 self.curTime = None

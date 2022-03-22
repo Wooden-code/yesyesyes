@@ -8,6 +8,8 @@ import os
 import json
 
 class Level:
+    before_buff1_ct = 0
+    before_buff2_ct = 0
     def start(self,game_info):
         self.game_info=game_info#注意这个函数执行顺序是按照这里的初始化的顺序，所有如果定义的话要注意顺序
         self.finished=False
@@ -76,7 +78,10 @@ class Level:
         self.coin_sentence_group=pygame.sprite.Group()
         self.powerup_group=pygame.sprite.Group()
         self.pipe_and_well_group=pygame.sprite.Group()
-        self.coin_buff_group=pygame.sprite.Group()
+        self.coin_buff1_group=pygame.sprite.Group()
+        self.coin_buff2_group = pygame.sprite.Group()
+        self.coin_before_buff1_group=pygame.sprite.Group()
+        self.coin_before_buff2_group=pygame.sprite.Group()
 
 
         if 'brick' in self.map_data:
@@ -107,10 +112,16 @@ class Level:
         if 'words' in self.map_data:
             for coin_data in self.map_data['words']:
                 x,y,type,group=coin_data['x'],coin_data['y'],coin_data['type'],coin_data['group']
-                if group==0 or type!=3:
+                if group==0:
                     self.coin_sentence_group.add(coin.Coin(x,y,type,group))
-                else:
-                    self.coin_buff_group.add(coin.Coin(x,y,type,group))
+                elif group==1 and type!=3:
+                    self.coin_before_buff1_group.add(coin.Coin(x,y,type,group))
+                elif group == 2 and type != 3:
+                    self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
+                elif group==1 and type==3:
+                    self.coin_buff1_group.add(coin.Coin(x,y,type,group))
+                elif group==2 and type==3:
+                    self.coin_buff2_group.add(coin.Coin(x,y,type,group))
 
         if 'pipe_and_well' in self.map_data:
             for pipe_data in self.map_data['pipe_and_well']:
@@ -165,7 +176,11 @@ class Level:
             self.dying_group.update(self)
             self.shell_group.update(self)
             self.coin_sentence_group.update()
-            self.coin_buff_group.update()
+            self.coin_before_buff1_group.update()
+            self.coin_before_buff2_group.update()
+            self.coin_buff1_group.update()
+            self.coin_buff2_group.update()
+
             self.powerup_group.update(self)  # 将level实例传给这个函数
 
             self.info.update(surface)
@@ -233,11 +248,30 @@ class Level:
             if powerup.name=='mushroom':
                 self.player.state='small2big'
                 powerup.kill()
-        buff=pygame.sprite.spritecollideany(self.player,self.coin_buff_group)
 
-        if  buff:
+
+
+        before_buff1=pygame.sprite.spritecollideany(self.player,self.coin_before_buff1_group)
+        if before_buff1:
+            self.before_buff1_ct+=1
+            before_buff1.kill()
+        buff1=pygame.sprite.spritecollideany(self.player,self.coin_buff1_group)
+
+        if  buff1 and self.before_buff1_ct==3:
             self.player.state='small2big'
-            buff.kill()
+            buff1.kill()
+
+        before_buff2 = pygame.sprite.spritecollideany(self.player, self.coin_before_buff2_group)
+        if before_buff2:
+            self.before_buff2_ct += 1
+            before_buff2.kill()
+        buff2 = pygame.sprite.spritecollideany(self.player, self.coin_buff2_group)
+
+        if buff2 and self.before_buff2_ct == 3:
+            self.player.state = 'small2big'
+            buff2.kill()
+
+
 
         pipe_and_well=pygame.sprite.spritecollideany(self.player,self.pipe_and_well_group)
         if pipe_and_well:
@@ -366,10 +400,18 @@ class Level:
 
 
     def update_game_window(self):
-        third=self.game_window.x + self.game_window.width/3#计算出窗口的三分之一位置
-        if self.player.x_vel>0 and self.player.rect.centerx > third and self.game_window.right< self.end_x:
-            self.game_window.x+=self.player.x_vel#按马里奥的速度移动这个窗口
-            self.start_x=self.game_window.x
+        self.start_x = self.game_window.x
+        #second=self.game_window.x + self.game_window.width/2#计算出窗口的三分之一位置
+        # if self.player.x_vel>0 and self.player.rect.centerx > second :
+        #self.game_window.x+=self.player.x_vel#按马里奥的速度移动这个窗口
+        if  self.player.rect.centerx>500:
+            self.game_window.x += self.player.x_vel
+
+
+        # self.start_x=self.game_window.x+500
+
+        #if self.game_window.x <-500:
+        #    self.player.x_vel=10
 
     def draw(self,surface):
         self.game_ground.blit(self.background,self.game_window,self.game_window)#背景和窗口都绘制到ground里面
@@ -380,7 +422,10 @@ class Level:
         self.dying_group.draw(self.game_ground)
         self.shell_group.draw(self.game_ground)
         self.coin_sentence_group.draw(self.game_ground)
-        self.coin_buff_group.draw(self.game_ground)
+        self.coin_before_buff1_group.draw(self.game_ground)
+        self.coin_before_buff2_group.draw(self.game_ground)
+        self.coin_buff1_group.draw(self.game_ground)
+        self.coin_buff2_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
         self.info.draw(surface)
 

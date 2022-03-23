@@ -73,9 +73,13 @@ class Ask:
         self.time = pygame.time.get_ticks()
         print(pygame.mouse.get_pos())
         if self.curTime!=None:
-            if pygame.time.get_ticks() - self.curTime > 8000:
+            if pygame.time.get_ticks() - self.curTime > 5000:
+                #surface.blit(self.explanation[self.num], (450, 179.5)) #做一个点击任意继续
+                #mouse=pygame.mouse.get_pressed()
+                #if mouse:
 
                 self.finished = True
+                self.game_info['num']=0
                 self.next = 'level'
                 self.curTime = None
         print(check_right)

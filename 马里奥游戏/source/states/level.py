@@ -43,6 +43,7 @@ class Level:
     def setup_background(self):
         self.image_name=self.map_data['image_name']
         self.background = setup.GRAPHICS['level_1.png']
+        self.count_word=setup.GRAPHICS['count_word.png']
         self.background_rect = self.background.get_rect()
 
 
@@ -367,12 +368,12 @@ class Level:
             #    if sprite.state=='rest':
             #        sprite.go_bumped()
 
-            if sprite.name=='brick':
-                if self.player.big and sprite.brick_type==0:#变大状态且是空砖块
-                    sprite.smashed(self.dying_group)
-
-                else:
-                    sprite.go_bumped()
+            #if sprite.name=='brick':
+            #    if self.player.big and sprite.brick_type==0:#变大状态且是空砖块
+            #        sprite.smashed(self.dying_group)
+            #
+            #    else:
+            sprite.go_bumped()
 
     def is_enemy_on(self,sprite):
         sprite.rect.y-=1#假意使砖块向上靠，如果有发生触碰，则有敌人
@@ -422,6 +423,7 @@ class Level:
     def draw(self,surface):
         self.game_ground.blit(self.background,self.game_window,self.game_window)#背景和窗口都绘制到ground里面
         self.game_ground.blit(self.player.image,self.player.rect)#人物也绘制进去
+        self.game_ground.blit(self.count_word,(10,55))
         self.powerup_group.draw(self.game_ground)#改变绘制顺序，才能有蘑菇长出来的效果
         self.brick_group.draw(self.game_ground)#绘制砖块
         self.enemy_group.draw(self.game_ground)

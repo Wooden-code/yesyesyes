@@ -51,7 +51,7 @@ class Info:
     def create_label(self,label,size=54,width_scale=1.25,height_scale=1):#调整字
         #print(label)
         font=pygame.font.SysFont(None,size)
-        label_image=font.render(label,0,(255,255,255),None)#把文字渲染成图片 白 理论上这里的1能够产生锯齿效果，但效果不明显，所以用以下方法
+        label_image=font.render(label,1,(0,0,0),None)#把文字渲染成图片 白 理论上这里的1能够产生锯齿效果，但效果不明显，所以用以下方法
         rect=label_image.get_rect()#先把字体变小产生图片
         label_image=pygame.transform.scale(label_image,(int(rect.width*width_scale),int(rect.height*height_scale)))#放大产生锯齿效果
 
@@ -68,7 +68,7 @@ class Info:
         #label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))  # 放大产生锯齿效果
         #return label_image
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
-        print('x  {}'.format(self.game_info['num']))
+        #print('x  {}'.format(self.game_info['num']))
         #self.draw(surface)
 
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])

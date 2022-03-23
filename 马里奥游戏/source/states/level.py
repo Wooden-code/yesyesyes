@@ -15,6 +15,7 @@ class Level:
         self.finished=False
         self.next='game_over'
         self.info=info.Info('level',self.game_info)
+
         self.load_map_data()
         self.setup_background()
         self.setup_start_position()
@@ -43,7 +44,7 @@ class Level:
     def setup_background(self):
         self.image_name=self.map_data['image_name']
         self.background = setup.GRAPHICS['level_1.png']
-        self.count_word=setup.GRAPHICS['count_word.png']
+
         self.background_rect = self.background.get_rect()
 
 
@@ -199,6 +200,7 @@ class Level:
         elif self.player.rect.right>self.end_x:
             self.player.rect.right=self.end_x
         self.check_x_collision()
+        print(self.player.rect.x)
         #if self.player.rect.x<0:#防止人物跑出屏幕外面吧
         #    self.player.rect.x=0
         #if self.player.rect.x>C.SCREEN_W-16*C.PLAYER_MULTI:
@@ -370,7 +372,6 @@ class Level:
             #if sprite.name=='brick':
             #    if self.player.big and sprite.brick_type==0:#变大状态且是空砖块
             #        sprite.smashed(self.dying_group)
-            #
             #    else:
             sprite.go_bumped()
 
@@ -422,7 +423,7 @@ class Level:
     def draw(self,surface):
         self.game_ground.blit(self.background,self.game_window,self.game_window)#背景和窗口都绘制到ground里面
         self.game_ground.blit(self.player.image,self.player.rect)#人物也绘制进去
-        self.game_ground.blit(self.count_word,(10,55))
+        #self.game_ground.blit(self.count_word,(10,55))
         self.powerup_group.draw(self.game_ground)#改变绘制顺序，才能有蘑菇长出来的效果
         self.brick_group.draw(self.game_ground)#绘制砖块
         self.enemy_group.draw(self.game_ground)
@@ -435,6 +436,7 @@ class Level:
         self.coin_buff2_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
         self.info.draw(surface)
+        #self.count_word.draw(surface)
 
 
 

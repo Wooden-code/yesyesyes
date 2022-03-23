@@ -14,6 +14,7 @@ class Info:
         self.create_state_labels()
         self.create_info_labels()
         self.flash_coin=coin.FlashingCoin()
+        self.count_word=setup.GRAPHICS['count_word.png']
 
 
     def create_state_labels(self):#创作某个阶段特有的文字，分数，金币，时间，等信息
@@ -51,7 +52,7 @@ class Info:
     def create_label(self,label,size=54,width_scale=1.25,height_scale=1):#调整字
         #print(label)
         font=pygame.font.SysFont(None,size)
-        label_image=font.render(label,1,(0,0,0),None)#把文字渲染成图片 白 理论上这里的1能够产生锯齿效果，但效果不明显，所以用以下方法
+        label_image=font.render(label,0,(255,255,255),None)#把文字渲染成图片 白 理论上这里的1能够产生锯齿效果，但效果不明显，所以用以下方法
         rect=label_image.get_rect()#先把字体变小产生图片
         label_image=pygame.transform.scale(label_image,(int(rect.width*width_scale),int(rect.height*height_scale)))#放大产生锯齿效果
 
@@ -68,7 +69,6 @@ class Info:
         #label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))  # 放大产生锯齿效果
         #return label_image
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
-        #print('x  {}'.format(self.game_info['num']))
         #self.draw(surface)
 
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
@@ -80,6 +80,7 @@ class Info:
         #print(self.state_labels[0][0],self.state_labels[0][1])
         #for label in self.state_labels:
         surface.blit(self.state_labels[-1][0],self.state_labels[-1][1])#用blit方法画出来 对应 图片，位置
+        surface.blit(self.count_word,(10,55))
         #for label in self.info_labels:
         #    surface.blit(label[0],label[1])
         #surface.blit(self.flash_coin.image,self.flash_coin.rect)

@@ -44,11 +44,11 @@ class Info:
         #self.info_labels.append((self.create_label('WORLD'), (450, 30)))
         #self.info_labels.append((self.create_label('TIME'), (625, 30)))
         #self.info_labels.append((self.create_label('000000'), (75, 55)))
-        #self.info_labels.append((self.create_label('x  {}').format(self.game_info['num']), (300, 55)))
+        #self.info_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
         pass
         #self.info_labels.append((self.create_label('1 - 1'), (480, 55)))
 
-    def create_label(self,label,size=40,width_scale=1.25,height_scale=1):#调整字
+    def create_label(self,label,size=54,width_scale=1.25,height_scale=1):#调整字
         #print(label)
         font=pygame.font.SysFont(C.FONT,size)
         label_image=font.render(label,1,(255,255,255))#把文字渲染成图片 白 理论上这里的1能够产生锯齿效果，但效果不明显，所以用以下方法
@@ -58,7 +58,7 @@ class Info:
 
         return label_image
 
-    def update(self,surface):#不断更新时间，分数这样
+    def update(self):#不断更新时间，分数这样
         #size = 40
         #width_scale = 1.25
         #height_scale = 1
@@ -69,15 +69,17 @@ class Info:
         #return label_image
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
         print('x  {}'.format(self.game_info['num']))
-        surface.blit(self.state_labels[0][0], self.state_labels[0][1])
+        #self.draw(surface)
+
+        #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
 
 
     def draw(self,surface):#绘画
-        pass
+
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
         #print(self.state_labels[0][0],self.state_labels[0][1])
         #for label in self.state_labels:
-        #    surface.blit(label[0],label[1])#用blit方法画出来 对应 图片，位置
+        surface.blit(self.state_labels[-1][0],self.state_labels[-1][1])#用blit方法画出来 对应 图片，位置
         #for label in self.info_labels:
         #    surface.blit(label[0],label[1])
         #surface.blit(self.flash_coin.image,self.flash_coin.rect)

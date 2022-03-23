@@ -1,4 +1,4 @@
-import pygame
+import pygame,os
 from .. import setup  # ..是上一级文件
 from .. import tools
 from .. import constants as C
@@ -27,15 +27,12 @@ class Ask:
         self.ask1 = setup.GRAPHICS['question2.png']
         self.ask2 = setup.GRAPHICS['question3.png']
 
-        self.answer1=setup.GRAPHICS['answer1.png']
-        self.answer2=setup.GRAPHICS['answer2.png']
-        self.answer3 = setup.GRAPHICS['answer3.png']
 
         #self.explanation1=setup.GRAPHICS[]
         #self.explanation2 = setup.GRAPHICS[]
         #self.explanation3 = setup.GRAPHICS[]
 
-        self.frames_answer=[self.answer1,self.answer2,self.answer3]
+        self.frames_answer=[pygame.image.load(os.path.abspath("resource/graphics/answer1.png")),pygame.image.load(os.path.abspath("resource/graphics/answer2.png")),pygame.image.load(os.path.abspath("resource/graphics/answer3.png"))]
         #self.frames_explanation=[self.explanation1,self.explanation2,self.explanation3]
 
 

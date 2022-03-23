@@ -304,7 +304,6 @@ class Level:
         if word:
 
             self.game_info['num']+=1
-            print(self.game_info['num'])
             word.kill()
 
 

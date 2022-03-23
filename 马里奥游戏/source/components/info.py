@@ -68,7 +68,6 @@ class Info:
         #label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))  # 放大产生锯齿效果
         #return label_image
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (300, 55)))
-        print('x  {}'.format(self.game_info['num']))
         #self.draw(surface)
 
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])

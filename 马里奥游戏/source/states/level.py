@@ -24,6 +24,7 @@ class Level:
         self.setup_enemies()
         self.check_x_collision()
         self.check_y_collision()
+        #self.info = info.Info('level', self.game_info)
 
 
 
@@ -170,7 +171,7 @@ class Level:
             self.check_if_go_die()
             self.update_game_window()
             self.succeed()
-
+            self.info.update()
             self.brick_group.update()
             self.enemy_group.update(self)
             self.dying_group.update(self)
@@ -183,10 +184,11 @@ class Level:
 
             self.powerup_group.update(self)  # 将level实例传给这个函数
 
-            self.info.update(surface)
+
 
 
         self.draw(surface)
+        #self.info.update(surface)
 
     def update_player_position(self):#用当前玩家的速度更新玩家的位置
         # x direction
@@ -254,20 +256,24 @@ class Level:
         before_buff1=pygame.sprite.spritecollideany(self.player,self.coin_before_buff1_group)
         if before_buff1:
             self.before_buff1_ct+=1
+            self.game_info['num'] += 1
             before_buff1.kill()
         buff1=pygame.sprite.spritecollideany(self.player,self.coin_buff1_group)
 
         if  buff1 and self.before_buff1_ct==3:
+            self.game_info['num'] += 1
             self.player.state='small2big'
             buff1.kill()
 
         before_buff2 = pygame.sprite.spritecollideany(self.player, self.coin_before_buff2_group)
         if before_buff2:
             self.before_buff2_ct += 1
+            self.game_info['num']+=1
             before_buff2.kill()
         buff2 = pygame.sprite.spritecollideany(self.player, self.coin_buff2_group)
 
         if buff2 and self.before_buff2_ct == 3:
+            self.game_info['num'] += 1
             self.player.state = 'small2big'
             buff2.kill()
 
@@ -390,11 +396,11 @@ class Level:
 
     def succeed(self):
 
-        if self.player.rect.x>14955:
+        if self.player.rect.x>15200:
             self.player.image=self.player.frames[5]
             pygame.time.wait(5000)
             self.finished=True
-            self.next='body_title'
+            self.next='end'
 
 
 

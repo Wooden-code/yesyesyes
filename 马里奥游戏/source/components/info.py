@@ -14,7 +14,7 @@ class Info:
         self.create_state_labels()
         self.create_info_labels()
         self.flash_coin=coin.FlashingCoin()
-        self.count_word=setup.GRAPHICS['count_word.png']
+        self.count_word = setup.GRAPHICS['count_word.png']
 
 
     def create_state_labels(self):#创作某个阶段特有的文字，分数，金币，时间，等信息

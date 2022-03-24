@@ -7,8 +7,11 @@ import random
 
 
 class Ask:
+    i = 0
     instance = None
     expanded_i = 1
+    before_i=-1
+    ct=0
 
     def __init__(self):
         game_info = {
@@ -28,12 +31,12 @@ class Ask:
         self.ask2 = setup.GRAPHICS['question3.png']
 
 
-        #self.explanation1=setup.GRAPHICS[]
-        #self.explanation2 = setup.GRAPHICS[]
-        #self.explanation3 = setup.GRAPHICS[]
+        self.explanation1=[setup.GRAPHICS['question2_1.png'],setup.GRAPHICS['question2_2.png'],setup.GRAPHICS['question2_3.png'],setup.GRAPHICS['question2_4.png']]
+        self.explanation2 =[ setup.GRAPHICS['question2_1.png']]
+        self.explanation3 = [setup.GRAPHICS['question3_1.png'],setup.GRAPHICS['question3_2.png']]
 
         self.frames_answer=[pygame.image.load(os.path.abspath("resource/graphics/answer1.png")),pygame.image.load(os.path.abspath("resource/graphics/answer2.png")),pygame.image.load(os.path.abspath("resource/graphics/answer3.png"))]
-        #self.frames_explanation=[self.explanation1,self.explanation2,self.explanation3]
+        self.frames_explanation=[self.explanation1,self.explanation2,self.explanation3]
 
 
 
@@ -60,7 +63,7 @@ class Ask:
 
     curTime = None
 
-    def update(self, surface, keys):  # 更新操作
+    def update(self, surface,flag):  # 更新操作
 
         surface.blit(self.background, (450, 179.5))
         # check_0= tools.button(*self.answer_rects[0])#检查各个选项
@@ -72,31 +75,57 @@ class Ask:
         check_right = tools.button(*self.answer_rects[self.answer])
         self.time = pygame.time.get_ticks()
         print(pygame.mouse.get_pos())
-        if self.curTime!=None:
-            if pygame.time.get_ticks() - self.curTime > 5000:
-                #surface.blit(self.explanation[self.num], (450, 179.5)) #做一个点击任意继续
-                #mouse=pygame.mouse.get_pressed()
-                #if mouse:
+        #if self.curTime!=None:
+            #if pygame.time.get_ticks() - self.curTime > 5000:
+                #for explanation in self.frames_explanation[self.num]:
+                #    if self.frames_explanation[self.num].index(explanation)==0:
+                #        surface.blit(explanation, (450, 179.5))
 
-                self.finished = True
-                self.game_info['num']=0
-                self.next = 'level'
-                self.curTime = None
+                        #os.system('pause')
+                 #   elif pygame.mouse.get_pressed():
+                  #      surface.blit(explanation, (450, 179.5)) #做一个点击任意继续
+                        #os.system('pause')
+
+
+
         print(check_right)
-        if check_right == 8:
+        if check_right == 8 :
             print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
             #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
             self.background.blit(self.frames_answer[self.num],(-2,-65))
+            self.ct+=1
 
-            if self.curTime == None:
-                self.curTime = pygame.time.get_ticks()
+            #if self.curTime == None:
+           #     self.curTime = pygame.time.get_ticks()
 
         elif check_right == 6:
             self.finished = True
             self.next = 'main_menu'
 
+        #if pygame.mouse.get_pressed() == (1, 0, 0):
+        #    surface.blit(self.frames_explanation[self.num][i], (450, 179.5))
+        #   i += 1
+        mouse = pygame.mouse.get_pressed()
+        print(mouse)
+        #self.before_i = self.i-1
+        if mouse == (1, 0, 0) and self.i < len(self.frames_explanation[self.num]) and check_right!=8 and self.ct!=0 and self.before_i<self.i:
+            self.before_i=self.i
+            pygame.time.wait(500)
+            self.background.blit(self.frames_explanation[self.num][self.i], (0, 0))
+            self.i += 1
+            # print(i)
+        elif mouse == (1, 0, 0) and self.i == len(self.frames_explanation[self.num]):
+            self.finished = True
+            self.next = 'level'
+            self.game_info['num'] = 0
+            # self.finished = True
+
+            # self.next = 'level'
+            self.curTime = None
+
     def draw(self, surface):
         self.game_ground.blit(self.background, (472.5, 290))
+
 
 class End:
     instance = None

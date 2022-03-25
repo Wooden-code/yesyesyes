@@ -64,6 +64,19 @@ class Coin(pygame.sprite.Sprite):
                 self.image=setup.GRAPHICS['sentence6.png']
             if self.type == 6:
                 self.image=setup.GRAPHICS['sentence7.png']
+            if self.type == 7:
+                self.image = setup.GRAPHICS['pronounce_1.png']
+            if self.type == 8:
+                self.image = setup.GRAPHICS['pronounce_2.png']
+            if self.type == 9:
+                self.image = setup.GRAPHICS['pronounce_3.png']
+            if self.type == 10:
+                self.image = setup.GRAPHICS['pronounce_4.png']
+            if self.type == 11:
+                self.image = setup.GRAPHICS['pronounce_5.png']
+            if self.type == 12:
+                self.image = setup.GRAPHICS['pronounce_6.png']
+
         elif self.group==1:
             if self.type==0:
                 self.image=setup.GRAPHICS['ji_1.png']

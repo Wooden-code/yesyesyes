@@ -397,10 +397,12 @@ class Level:
 
     def succeed(self):
 
-        if self.player.rect.x>15200:
+        if self.player.rect.x>15200 and self.game_info['num']==14:
             self.player.image=self.player.frames[5]
-            pygame.time.wait(5000)
+            pygame.time.wait(2000)
             self.finished=True
+            self.next='end'
+        elif self.player.rect.x>15200 and self.game_info['num']!=14:
             self.next='end'
 
 

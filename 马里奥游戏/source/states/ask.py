@@ -31,8 +31,8 @@ class Ask:
         self.ask2 = setup.GRAPHICS['question3.png']
 
 
-        self.explanation1=[setup.GRAPHICS['question2_1.png'],setup.GRAPHICS['question2_2.png'],setup.GRAPHICS['question2_3.png'],setup.GRAPHICS['question2_4.png']]
-        self.explanation2 =[ setup.GRAPHICS['question2_1.png']]
+        self.explanation1=[setup.GRAPHICS['question1_1.png']]
+        self.explanation2 =[setup.GRAPHICS['question2_1.png'],setup.GRAPHICS['question2_2.png'],setup.GRAPHICS['question2_3.png'],setup.GRAPHICS['question2_4.png']]
         self.explanation3 = [setup.GRAPHICS['question3_1.png'],setup.GRAPHICS['question3_2.png']]
 
         self.frames_answer=[pygame.image.load(os.path.abspath("resource/graphics/answer1.png")),pygame.image.load(os.path.abspath("resource/graphics/answer2.png")),pygame.image.load(os.path.abspath("resource/graphics/answer3.png"))]
@@ -89,7 +89,7 @@ class Ask:
 
 
         print(check_right)
-        if check_right == 8 :
+        if check_right == 8 and self.ct==0:
             print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
             #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
             self.background.blit(self.frames_answer[self.num],(-2,-65))
@@ -115,6 +115,9 @@ class Ask:
             self.i += 1
             # print(i)
         elif mouse == (1, 0, 0) and self.i == len(self.frames_explanation[self.num]):
+            self.i=0
+            self.ct=0
+            self.before_i=-1
             self.finished = True
             self.next = 'level'
             self.game_info['num'] = 0

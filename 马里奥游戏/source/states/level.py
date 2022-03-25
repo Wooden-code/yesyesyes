@@ -50,6 +50,7 @@ class Level:
 
 
 
+
         rect=self.background.get_rect()
         self.background=pygame.transform.scale(self.background,(int(rect.width*C.LEVEL_H_MULTI),int(rect.height*C.LEVEL_H_MULTI)))
 
@@ -438,6 +439,7 @@ class Level:
         self.coin_buff2_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
         self.info.draw(surface)
+
         #self.count_word.draw(surface)
 
 

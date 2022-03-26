@@ -42,7 +42,7 @@ class Ask:
 
         # self.ask6 = setup.GRAPHICS['ask_6.png']
         self.frames = [self.ask0, self.ask1, self.ask2]
-        self.answer_rects = [(468, 436, 503, 453), (468, 473,503, 490),(468, 509, 503, 530), (468, 545, 503, 560)]
+        self.answer_rects = [(489, 470, 509, 488), (489, 499,509, 516),(489, 529, 509, 546), (489, 560, 509, 575)]
         self.answer_dict = {'0': 0,
                             '1': 2,
                             '2': 1}
@@ -92,7 +92,7 @@ class Ask:
         if check_right == 8 and self.ct==0:
             print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
             #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
-            self.background.blit(self.frames_answer[self.num],(-2,-65))
+            self.background.blit(self.frames_answer[self.num],(-4,17))
             self.ct+=1
 
             #if self.curTime == None:

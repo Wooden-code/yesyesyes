@@ -268,7 +268,7 @@ class Level:
             before_buff1.kill()
         buff1=pygame.sprite.spritecollideany(self.player,self.coin_buff1_group)
 
-        if  buff1 and self.before_buff1_ct==3:
+        if  buff1 and self.before_buff1_ct>=3:
             self.game_info['num'] += 1
             self.player.state='small2big'
             buff1.kill()
@@ -469,7 +469,7 @@ class Level:
         surface.blit(self.game_ground,(0,0),self.game_window)#第一个参数代表目标图层，第三个参数代表指定位置 中间就是放入的左上角
         self.info.draw(surface)
         if self.player.rect.x > 15200 and self.game_info['num'] == 21:
-            surface.blit(self.succeed_image,(0,0))
+            surface.blit(self.succeed_image,(540,350))
             if self.curTime == None:
                self.curTime = pygame.time.get_ticks()
             if self.curTime != None:
@@ -478,7 +478,7 @@ class Level:
                     self.next='body_title'
         elif self.player.rect.x > 15200 and self.game_info['num'] != 21:
 
-           surface.blit(self.not_succeed_image, (0, 0))
+           surface.blit(self.not_succeed_image, (0, 350))
 
 
     def check_checkpoints(self):

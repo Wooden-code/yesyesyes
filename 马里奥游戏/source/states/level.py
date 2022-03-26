@@ -205,7 +205,7 @@ class Level:
         elif self.player.rect.right>self.end_x:
             self.player.rect.right=self.end_x
         self.check_x_collision()
-        print(self.player.rect.x)
+        print(self.player.rect.x,'    ',self.player.rect.y)
         #if self.player.rect.x<0:#防止人物跑出屏幕外面吧
         #    self.player.rect.x=0
         #if self.player.rect.x>C.SCREEN_W-16*C.PLAYER_MULTI:

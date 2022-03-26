@@ -10,6 +10,7 @@ import json
 class Level:
     before_buff1_ct = 0
     before_buff2_ct = 0
+    before_buff3_ct = 0
     curTime = None
     flage=False
     def start(self,game_info):
@@ -88,8 +89,10 @@ class Level:
         self.pipe_and_well_group=pygame.sprite.Group()
         self.coin_buff1_group=pygame.sprite.Group()
         self.coin_buff2_group = pygame.sprite.Group()
+        self.coin_buff3_group = pygame.sprite.Group()
         self.coin_before_buff1_group=pygame.sprite.Group()
         self.coin_before_buff2_group=pygame.sprite.Group()
+        self.coin_before_buff3_group = pygame.sprite.Group()
 
 
         if 'brick' in self.map_data:
@@ -127,13 +130,14 @@ class Level:
                 elif group == 2 and type != 3:
                     self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
                 elif group == 3 and type != 3:
-                    self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
+                    self.coin_before_buff3_group.add(coin.Coin(x, y, type, group))
+
                 elif group==1 and type==3:
                     self.coin_buff1_group.add(coin.Coin(x,y,type,group))
                 elif group==2 and type==3:
                     self.coin_buff2_group.add(coin.Coin(x,y,type,group))
                 elif group==3 and type==3:
-                    self.coin_buff2_group.add(coin.Coin(x,y,type,group))
+                    self.coin_buff3_group.add(coin.Coin(x,y,type,group))
 
 
         if 'pipe_and_well' in self.map_data:
@@ -285,10 +289,22 @@ class Level:
             before_buff2.kill()
         buff2 = pygame.sprite.spritecollideany(self.player, self.coin_buff2_group)
 
-        if buff2 and self.before_buff2_ct == 3:
+        if buff2 and self.before_buff2_ct >= 3:
             self.game_info['num'] += 1
             self.player.state = 'small2big'
             buff2.kill()
+
+        before_buff3 = pygame.sprite.spritecollideany(self.player, self.coin_before_buff3_group)
+        if before_buff3:
+            self.before_buff3_ct += 1
+            self.game_info['num'] += 1
+            before_buff3.kill()
+        buff3= pygame.sprite.spritecollideany(self.player, self.coin_buff3_group)
+
+        if buff3 and self.before_buff3_ct >= 3:
+            self.game_info['num'] += 1
+            self.player.state = 'small2big'
+            buff3.kill()
 
 
 
@@ -455,8 +471,10 @@ class Level:
         self.coin_sentence_group.draw(self.game_ground)
         self.coin_before_buff1_group.draw(self.game_ground)
         self.coin_before_buff2_group.draw(self.game_ground)
+        self.coin_before_buff3_group.draw(self.game_ground)
         self.coin_buff1_group.draw(self.game_ground)
         self.coin_buff2_group.draw(self.game_ground)
+        self.coin_buff3_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
         self.info.draw(surface)
         #if self.succeed()==1:

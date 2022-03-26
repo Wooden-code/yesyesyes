@@ -126,10 +126,15 @@ class Level:
                     self.coin_before_buff1_group.add(coin.Coin(x,y,type,group))
                 elif group == 2 and type != 3:
                     self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
+                elif group == 3 and type != 3:
+                    self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
                 elif group==1 and type==3:
                     self.coin_buff1_group.add(coin.Coin(x,y,type,group))
                 elif group==2 and type==3:
                     self.coin_buff2_group.add(coin.Coin(x,y,type,group))
+                elif group==3 and type==3:
+                    self.coin_buff2_group.add(coin.Coin(x,y,type,group))
+
 
         if 'pipe_and_well' in self.map_data:
             for pipe_data in self.map_data['pipe_and_well']:

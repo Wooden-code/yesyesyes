@@ -10,6 +10,7 @@ import json
 class Level:
     before_buff1_ct = 0
     before_buff2_ct = 0
+    curTime = None
     flage=False
     def start(self,game_info):
         self.game_info=game_info#注意这个函数执行顺序是按照这里的初始化的顺序，所有如果定义的话要注意顺序
@@ -176,7 +177,7 @@ class Level:
             self.check_checkpoints()
             self.check_if_go_die()
             self.update_game_window()
-            self.succeed()
+            #self.succeed()
             self.info.update()
             self.brick_group.update()
             self.enemy_group.update(self)
@@ -399,20 +400,23 @@ class Level:
             sprite.state='fall'
         sprite.rect.y-=1
 
-    def succeed(self):
+    #def succeed(self):
 
-        if self.player.rect.x > 15200 and self.game_info['num'] == 20:
-            self.player.image = self.player.frames[5]
-            return 1
+     #   if self.player.rect.x > 15200 and self.game_info['num'] == 20:
+
             #self.background.blit(self.succeed_image, (200, 300))
             #if pygame.mouse.get_pressed() == (1, 0, 0):
             #    pygame.time.wait(500)
-            #    self.finished = True
-            #    self.next = 'body_title'
-        elif self.player.rect.x > 15200 and self.game_info['num'] != 20:
+     #           self.game_info['num']=0
+      #          self.finished = True
+       #         self.next = 'end'
+       # elif self.player.rect.x > 15200 and self.game_info['num'] != 20:
             #print("ok")
-            return 2
-            #self.background.blit(self.not_succeed_image, (0, 0))
+            #self.game_info['num'] = 0
+            #self.game_info['player_state']=1
+            #self.finished=True
+            #self.next='end'
+        #    self.background.blit(self.not_succeed_image, (0, 0))
             #if pygame.mouse.get_pressed() == (1, 0, 0):
             #    self.setup_background()
 
@@ -450,23 +454,31 @@ class Level:
         self.coin_buff2_group.draw(self.game_ground)
         self.pipe_and_well_group.draw(self.game_ground)
         self.info.draw(surface)
-        if self.succeed()==1:
-            self.game_ground.blit(self.succeed_image,(200,300))
-        if self.succeed()==2:
-            print("ok")
-            surface.blit(setup.GRAPHICS['not_succeed.png'], (15306, 300))
-            surface.blit(setup.GRAPHICS['not_succeed.png'], (300, 300))
-            pygame.display.flip()
-            pygame.display.update()
-            surface.blit(setup.GRAPHICS['not_succeed.png'], (15306, 300))
-            surface.blit(setup.GRAPHICS['not_succeed.png'], (300, 300))
-
-
+        #if self.succeed()==1:
+        #    self.game_ground.blit(self.succeed_image,(200,300))
+        #if self.succeed()==2:
+        #    print("ok")
+        #    surface.blit(setup.GRAPHICS['not_succeed.png'], (15306, 300))
+        #    surface.blit(setup.GRAPHICS['not_succeed.png'], (300, 300))
+        #    pygame.display.flip()
+        #    pygame.display.update()
+        #    surface.blit(setup.GRAPHICS['not_succeed.png'], (15306, 300))
+        #    surface.blit(setup.GRAPHICS['not_succeed.png'], (300, 300))
         #self.count_word.draw(surface)
-
 
         surface.blit(self.game_ground,(0,0),self.game_window)#第一个参数代表目标图层，第三个参数代表指定位置 中间就是放入的左上角
         self.info.draw(surface)
+        if self.player.rect.x > 15200 and self.game_info['num'] == 21:
+            surface.blit(self.succeed_image,(0,0))
+            if self.curTime == None:
+               self.curTime = pygame.time.get_ticks()
+            if self.curTime != None:
+                if pygame.time.get_ticks() - self.curTime > 3000:
+                    self.finished=True
+                    self.next='body_title'
+        elif self.player.rect.x > 15200 and self.game_info['num'] != 21:
+
+           surface.blit(self.not_succeed_image, (0, 0))
 
 
     def check_checkpoints(self):

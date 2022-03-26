@@ -11,6 +11,7 @@
     ],
     "pipe_and_well":[
         {"x":15400, "y":10, "width": 83, "height":126, "type":2}
+
     ],
     "step":[
         {"x":5745, "y":495, "width": 40, "height": 44},

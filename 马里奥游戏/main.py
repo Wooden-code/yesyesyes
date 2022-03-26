@@ -16,7 +16,6 @@ def main():
         'load_screen':load_screen.LoadScreen(),
         'level':level.Level(),
         'ask':ask.Ask(),
-        'end': ask.End(),
         'body_title':body_title.Body_title()
 
     }

@@ -413,15 +413,15 @@
             {"x":8399, "y":240, "direction":0, "type":0, "color":0}
         ]},
         {"911":[
-            {"x":11600, "y":400, "direction":0, "type":1, "color":0},
+            {"x":11570, "y":400, "direction":0, "type":1, "color":0},
             {"x":11630, "y":400, "direction":0, "type":0, "color":0},
-                        {"x":11660, "y":400, "direction":1, "type":1, "color":0},
+                        {"x":11690, "y":400, "direction":1, "type":1, "color":0},
             {"x":11630, "y":400, "direction":1, "type":0, "color":0}
         ]},
                 {"119":[
-            {"x":11600, "y":90, "direction":0, "type":1, "color":0},
+            {"x":11570, "y":90, "direction":0, "type":1, "color":0},
             {"x":11630, "y":90, "direction":0, "type":0, "color":0},
-                    {"x":11660, "y":90, "direction":1, "type":1, "color":0},
+                    {"x":11690, "y":90, "direction":1, "type":1, "color":0},
             {"x":11630, "y":90, "direction":1, "type":0, "color":0}
         ]},
         {"5":[

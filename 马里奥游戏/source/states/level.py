@@ -511,8 +511,7 @@ class Level:
             if checkpoint.checkpoint_type==0:
                 self.enemy_group.add(self.enemy_group_dict[str(checkpoint.enemy_groupid)])
             checkpoint.kill()#检查点被触碰就消失
-            pygame.mixer.music.load(os.path.abspath("resource/music/eat.ogg"))
-            pygame.mixer.music.set_volume(1.0)
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
 
     def check_if_go_die(self):
         if self.player.rect.y>C.SCREEN_H:#判断马里奥是否掉出屏幕外

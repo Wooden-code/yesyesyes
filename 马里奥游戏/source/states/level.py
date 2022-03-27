@@ -328,12 +328,12 @@ class Level:
         enemy=pygame.sprite.spritecollideany(self.player,self.enemy_group)
 
         if brick :
-            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
+            pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
             self.adjust_player_y(brick)
 
         pipe_and_well = pygame.sprite.spritecollideany(self.player, self.pipe_and_well_group)
         if pipe_and_well:
-            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
+            pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
             self.adjust_player_y(pipe_and_well)
 
         word=pygame.sprite.spritecollideany(self.player,self.coin_sentence_group)

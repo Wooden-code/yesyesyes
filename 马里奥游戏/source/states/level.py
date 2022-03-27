@@ -287,23 +287,26 @@ class Level:
             self.before_buff2_ct += 1
             self.game_info['num']+=1
             before_buff2.kill()
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff2 = pygame.sprite.spritecollideany(self.player, self.coin_buff2_group)
 
         if buff2 and self.before_buff2_ct >= 3:
             self.game_info['num'] += 1
             self.player.state = 'small2big'
             buff2.kill()
-
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         before_buff3 = pygame.sprite.spritecollideany(self.player, self.coin_before_buff3_group)
         if before_buff3:
             self.before_buff3_ct += 1
             self.game_info['num'] += 1
             before_buff3.kill()
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff3= pygame.sprite.spritecollideany(self.player, self.coin_buff3_group)
 
         if buff3 and self.before_buff3_ct >= 3:
             self.game_info['num'] += 1
             self.player.state = 'small2big'
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
             buff3.kill()
 
 
@@ -323,15 +326,17 @@ class Level:
         enemy=pygame.sprite.spritecollideany(self.player,self.enemy_group)
 
         if brick :
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
             self.adjust_player_y(brick)
 
         pipe_and_well = pygame.sprite.spritecollideany(self.player, self.pipe_and_well_group)
         if pipe_and_well:
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
             self.adjust_player_y(pipe_and_well)
 
         word=pygame.sprite.spritecollideany(self.player,self.coin_sentence_group)
         if word:
-
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
             self.game_info['num']+=1
             word.kill()
 
@@ -511,7 +516,7 @@ class Level:
             if checkpoint.checkpoint_type==0:
                 self.enemy_group.add(self.enemy_group_dict[str(checkpoint.enemy_groupid)])
             checkpoint.kill()#检查点被触碰就消失
-            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
+
 
     def check_if_go_die(self):
         if self.player.rect.y>C.SCREEN_H:#判断马里奥是否掉出屏幕外

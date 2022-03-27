@@ -492,11 +492,12 @@ class Level:
         surface.blit(self.game_ground,(0,0),self.game_window)#第一个参数代表目标图层，第三个参数代表指定位置 中间就是放入的左上角
         self.info.draw(surface)
         if self.player.rect.x > 15200 and self.game_info['num'] >= 40:
-            surface.blit(self.succeed_image,(540,350))
+            surface.blit(self.succeed_image,(460,350))
             if self.curTime == None:
                self.curTime = pygame.time.get_ticks()
             if self.curTime != None:
                 if pygame.time.get_ticks() - self.curTime > 3000:
+                    self.game_info['num']=0
                     self.finished=True
                     self.next='body_title'
         elif self.player.rect.x > 15200 :

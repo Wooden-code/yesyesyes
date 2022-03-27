@@ -275,12 +275,14 @@ class Level:
             self.before_buff1_ct+=1
             self.game_info['num'] += 1
             before_buff1.kill()
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff1=pygame.sprite.spritecollideany(self.player,self.coin_buff1_group)
 
         if  buff1 and self.before_buff1_ct>=3:
             self.game_info['num'] += 1
             self.player.state='small2big'
             buff1.kill()
+            pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
 
         before_buff2 = pygame.sprite.spritecollideany(self.player, self.coin_before_buff2_group)
         if before_buff2:

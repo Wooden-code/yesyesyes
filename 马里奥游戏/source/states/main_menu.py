@@ -4,7 +4,7 @@
 # @File : main_menu.py.py
 # @software: PyCharm
 
-import pygame,math
+import pygame,math,random
 from .. import setup  # ..是上一级文件
 from .. import tools
 from .. import constants as C
@@ -74,7 +74,7 @@ class MainMenu:
                 self.finished=True
             elif self.cursor.state=='2P':
                 self.finished=True
-        self.welldone=tools.button(100, 100, 300, 300)
+        self.welldone=tools.button(240, 250, 510, 520)
         self.check_if = tools.button(592, 653, 654, 759)
 
 
@@ -102,8 +102,8 @@ class MainMenu:
         if self.welldone == 10 and MainMenu.expanded_i != 6:
             surface.blit(self.tyj,((math.sin(math.radians(MainMenu.walk))*400+487), abs(math.sin(math.radians(MainMenu.walk))*646)))
             surface.blit(self.lmt, (1000-(math.sin(math.radians(MainMenu.walk))*400+487), 700-abs(math.sin(math.radians(MainMenu.walk))*646)))
-            surface.blit(self.lxr,(100,400))
-            surface.blit(self.yyt, (400, 400))
+            surface.blit(self.lxr,(random.randint(0,1200),random.randint(0,800)))
+            surface.blit(self.yyt, (random.randint(0,1200),random.randint(0,800)))
         MainMenu.walk+=1
 
     def reset_game_info(self):

@@ -214,7 +214,7 @@ class Level:
         elif self.player.rect.right>self.end_x:
             self.player.rect.right=self.end_x
         self.check_x_collision()
-        print(self.player.rect.x,'    ',self.player.rect.y)
+        # print(self.player.rect.x,'    ',self.player.rect.y)
         #if self.player.rect.x<0:#防止人物跑出屏幕外面吧
         #    self.player.rect.x=0
         #if self.player.rect.x>C.SCREEN_W-16*C.PLAYER_MULTI:
@@ -491,7 +491,7 @@ class Level:
 
         surface.blit(self.game_ground,(0,0),self.game_window)#第一个参数代表目标图层，第三个参数代表指定位置 中间就是放入的左上角
         self.info.draw(surface)
-        if self.player.rect.x > 15200 and self.game_info['num'] == 21:
+        if self.player.rect.x > 15200 and self.game_info['num'] >= 40:
             surface.blit(self.succeed_image,(540,350))
             if self.curTime == None:
                self.curTime = pygame.time.get_ticks()
@@ -499,7 +499,7 @@ class Level:
                 if pygame.time.get_ticks() - self.curTime > 3000:
                     self.finished=True
                     self.next='body_title'
-        elif self.player.rect.x > 15200 and self.game_info['num'] != 21:
+        elif self.player.rect.x > 15200 :
 
            surface.blit(self.not_succeed_image, (0, 350))
 

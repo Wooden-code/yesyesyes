@@ -3,7 +3,7 @@ import pygame
 from ..components import info
 from .. import setup,tools,sound
 from .. import constants as C
-from ..components import player,brick,stuff,box,enemy,coin,pipe_and_well
+from ..components import player,brick,stuff,box,enemy,coin,pipe_and_well,bag
 import os
 import json
 
@@ -18,6 +18,7 @@ class Level:
         self.finished=False
         self.next='game_over'
         self.info=info.Info('level',self.game_info)
+        self.bag=bag.Bag('level',self.game_info)
 
         self.load_map_data()
         self.setup_background()
@@ -94,6 +95,8 @@ class Level:
         self.coin_before_buff2_group=pygame.sprite.Group()
         self.coin_before_buff3_group = pygame.sprite.Group()
 
+        self.words_all_group=pygame.sprite.Group()
+
 
         if 'brick' in self.map_data:
             for brick_data in self.map_data['brick']:
@@ -125,19 +128,21 @@ class Level:
                 x,y,type,group=coin_data['x'],coin_data['y'],coin_data['type'],coin_data['group']
                 if group==0:
                     self.coin_sentence_group.add(coin.Coin(x,y,type,group))
-                elif group==1 and type!=3:
+                elif group==1 and type!=5:
                     self.coin_before_buff1_group.add(coin.Coin(x,y,type,group))
-                elif group == 2 and type != 3:
+                elif group == 2 and type != 5:
                     self.coin_before_buff2_group.add(coin.Coin(x, y, type, group))
-                elif group == 3 and type != 3:
+                elif group == 3 and type != 5:
                     self.coin_before_buff3_group.add(coin.Coin(x, y, type, group))
 
-                elif group==1 and type==3:
+                elif group==1 and type==5:
                     self.coin_buff1_group.add(coin.Coin(x,y,type,group))
-                elif group==2 and type==3:
+                elif group==2 and type==5:
                     self.coin_buff2_group.add(coin.Coin(x,y,type,group))
-                elif group==3 and type==3:
+                elif group==3 and type==5:
                     self.coin_buff3_group.add(coin.Coin(x,y,type,group))
+
+
 
 
         if 'pipe_and_well' in self.map_data:
@@ -278,7 +283,7 @@ class Level:
             pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff1=pygame.sprite.spritecollideany(self.player,self.coin_buff1_group)
 
-        if  buff1 and self.before_buff1_ct>=3:
+        if  buff1 and self.before_buff1_ct>=5:
             self.game_info['num'] += 1
             self.player.state='small2big'
             buff1.kill()
@@ -292,7 +297,7 @@ class Level:
             pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff2 = pygame.sprite.spritecollideany(self.player, self.coin_buff2_group)
 
-        if buff2 and self.before_buff2_ct >= 3:
+        if buff2 and self.before_buff2_ct >= 5:
             self.game_info['num'] += 1
             self.player.state = 'small2big'
             buff2.kill()
@@ -305,10 +310,11 @@ class Level:
             pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
         buff3= pygame.sprite.spritecollideany(self.player, self.coin_buff3_group)
 
-        if buff3 and self.before_buff3_ct >= 3:
+        if buff3 and self.before_buff3_ct >= 5:
             self.game_info['num'] += 1
             self.player.state = 'small2big'
             pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
+
             buff3.kill()
 
 
@@ -340,6 +346,7 @@ class Level:
         if word:
             pygame.mixer.Sound(os.path.abspath("resource/music/eat.ogg")).play()
             self.game_info['num']+=1
+
             word.kill()
 
 
@@ -498,6 +505,7 @@ class Level:
 
         surface.blit(self.game_ground,(0,0),self.game_window)#第一个参数代表目标图层，第三个参数代表指定位置 中间就是放入的左上角
         self.info.draw(surface)
+        self.bag.draw(surface)
         if self.player.rect.x > 15200 and self.game_info['num'] >= 40:
             surface.blit(self.succeed_image,(460,350))
             if self.curTime == None:

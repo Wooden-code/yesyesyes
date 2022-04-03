@@ -119,6 +119,10 @@ class Coin(pygame.sprite.Sprite):
                 self.image=setup.GRAPHICS['ji_3.png']
             if self.type==3:
                 self.image=setup.GRAPHICS['ji_4.png']
+            if self.type==4:
+                self.image=setup.GRAPHICS['ji_5.png']
+            if self.type==5:
+                self.image=setup.GRAPHICS['ji_6.png']
         elif self.group==2:
             if self.type==0:
                 self.image=setup.GRAPHICS['han_1.png']
@@ -128,6 +132,10 @@ class Coin(pygame.sprite.Sprite):
                 self.image=setup.GRAPHICS['han_3.png']
             if self.type==3:
                 self.image=setup.GRAPHICS['han_4.png']
+            if self.type==4:
+                self.image=setup.GRAPHICS['han_5.png']
+            if self.type==5:
+                self.image=setup.GRAPHICS['han_6.png']
         elif self.group==3:
             if self.type == 0:
                 self.image = setup.GRAPHICS['you_1.png']
@@ -137,6 +145,12 @@ class Coin(pygame.sprite.Sprite):
                 self.image = setup.GRAPHICS['you_3.png']
             if self.type == 3:
                 self.image = setup.GRAPHICS['you_4.png']
+            if self.type == 4:
+                self.image = setup.GRAPHICS['you_5.png']
+            if self.type == 5:
+                self.image = setup.GRAPHICS['you_6.png']
+
+
         self.rect = self.image.get_rect()
 
         self.rect.x = self.x

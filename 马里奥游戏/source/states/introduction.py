@@ -7,7 +7,7 @@ import random
 
 
 
-class Body_title:
+class Introduction:
     instance = None
     flag=False
     def __init__(self):
@@ -20,8 +20,9 @@ class Body_title:
         }
         self.start(game_info)
     def start(self,game_info):
-        self.background=[setup.GRAPHICS['chuangguan_1.png'],setup.GRAPHICS['chuangguan_1.png'],setup.GRAPHICS['chuangguan_2.png'],setup.GRAPHICS['chuangguan_3.png'],setup.GRAPHICS['chuangguan_4.png'],
-                         setup.GRAPHICS['chuangguan_5.png']]
+        self.background=[setup.GRAPHICS['introduction_1.png'],setup.GRAPHICS['introduction_1.png'],setup.GRAPHICS['introduction_2.png'],setup.GRAPHICS['introduction_3.png'],setup.GRAPHICS['introduction_4.png'],
+                         setup.GRAPHICS['introduction_5.png'],setup.GRAPHICS['introduction_6.png'],setup.GRAPHICS['introduction_7.png'],setup.GRAPHICS['introduction_8.png'],setup.GRAPHICS['introduction_8.png'],
+                         setup.GRAPHICS['introduction_9.png'],setup.GRAPHICS['introduction_10.png'],setup.GRAPHICS['introduction_11.png']]
         self.index=0
         self.background_rect = self.background[self.index].get_rect()
         self.game_ground = pygame.Surface((self.background_rect.width, self.background_rect.height))

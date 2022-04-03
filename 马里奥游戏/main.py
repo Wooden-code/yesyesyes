@@ -7,16 +7,19 @@
 # 程序主要入口
 import pygame,os
 from source import tools, setup,sound
-from source.states import main_menu,load_screen,level,ask,body_title
+from source.states import main_menu,load_screen,level,ask,body_title,introduction,chengyu
 
 
 def main():
     state_dict={#把所有阶段写成一个字典
         'main_menu':main_menu.MainMenu(),
+        'introduction': introduction.Introduction(),
         'load_screen':load_screen.LoadScreen(),
         'level':level.Level(),
         'ask':ask.Ask(),
-        'body_title':body_title.Body_title()
+        'body_title':body_title.Body_title(),
+        'chengyu': chengyu.Chengyu()
+
 
     }
 

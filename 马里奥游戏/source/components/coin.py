@@ -50,105 +50,22 @@ class Coin(pygame.sprite.Sprite):
 
 
         if self.group==0:
-            if self.type==0 :
-                self.image=setup.GRAPHICS['sentence1.png']
-            if self.type == 1 :
-                self.image=setup.GRAPHICS['sentence2.png']
-            if self.type == 2 :
-                self.image=setup.GRAPHICS['sentence3.png']
-            if self.type == 3:
-                self.image=setup.GRAPHICS['sentence4.png']
-            if self.type == 4:
-                self.image=setup.GRAPHICS['sentence5.png']
-            if self.type == 5:
-                self.image=setup.GRAPHICS['sentence6.png']
-            if self.type == 6:
-                self.image=setup.GRAPHICS['sentence7.png']
-            if self.type == 7:
-                self.image=setup.GRAPHICS['sentence_8.png']
-            if self.type == 8:
-                self.image=setup.GRAPHICS['sentence_9.png']
-            if self.type == 9:
-                self.image=setup.GRAPHICS['sentence_10.png']
-            if self.type == 10:
-                self.image=setup.GRAPHICS['sentence_11.png']
-            if self.type == 11:
-                self.image=setup.GRAPHICS['sentence_12.png']
-            if self.type == 12:
-                self.image=setup.GRAPHICS['sentence_13.png']
-            if self.type == 13:
-                self.image=setup.GRAPHICS['sentence_14.png']
-            if self.type == 14:
-                self.image=setup.GRAPHICS['sentence_15.png']
-            if self.type == 15:
-                self.image=setup.GRAPHICS['sentence_16.png']
+            if self.type < 16:
+                try:
+                    self.image=setup.GRAPHICS[f'sentence{self.type+1}.png']
+                except:
+                    self.image = setup.GRAPHICS[f'sentence_{self.type + 1}.png']
+            else:
+                self.image = setup.GRAPHICS[f'pronounce_{self.type-15}.png']
 
-            if self.type == 16:
-                self.image = setup.GRAPHICS['pronounce_1.png']
-            if self.type == 17:
-                self.image = setup.GRAPHICS['pronounce_2.png']
-            if self.type == 18:
-                self.image = setup.GRAPHICS['pronounce_3.png']
-            if self.type == 19:
-                self.image = setup.GRAPHICS['pronounce_4.png']
-            if self.type == 20:
-                self.image = setup.GRAPHICS['pronounce_5.png']
-            if self.type == 21:
-                self.image = setup.GRAPHICS['pronounce_6.png']
-            if self.type == 22:
-                self.image = setup.GRAPHICS['pronounce_7.png']
-            if self.type == 23:
-                self.image = setup.GRAPHICS['pronounce_8.png']
-            if self.type == 24:
-                self.image = setup.GRAPHICS['pronounce_9.png']
-            if self.type == 25:
-                self.image = setup.GRAPHICS['pronounce_10.png']
-            if self.type == 26:
-                self.image = setup.GRAPHICS['pronounce_11.png']
-            if self.type == 27:
-                self.image = setup.GRAPHICS['pronounce_12.png']
-            if self.type == 28:
-                self.image = setup.GRAPHICS['pronounce_13.png']
 
         elif self.group==1:
-            if self.type==0:
-                self.image=setup.GRAPHICS['ji_1.png']
-            if self.type==1:
-                self.image=setup.GRAPHICS['ji_2.png']
-            if self.type==2:
-                self.image=setup.GRAPHICS['ji_3.png']
-            if self.type==3:
-                self.image=setup.GRAPHICS['ji_4.png']
-            if self.type==4:
-                self.image=setup.GRAPHICS['ji_5.png']
-            if self.type==5:
-                self.image=setup.GRAPHICS['ji_6.png']
+            self.image=setup.GRAPHICS[f'ji_{self.type+1}.png']
+
         elif self.group==2:
-            if self.type==0:
-                self.image=setup.GRAPHICS['han_1.png']
-            if self.type==1:
-                self.image=setup.GRAPHICS['han_2.png']
-            if self.type==2:
-                self.image=setup.GRAPHICS['han_3.png']
-            if self.type==3:
-                self.image=setup.GRAPHICS['han_4.png']
-            if self.type==4:
-                self.image=setup.GRAPHICS['han_5.png']
-            if self.type==5:
-                self.image=setup.GRAPHICS['han_6.png']
+            self.image=setup.GRAPHICS[f'han_{self.type+1}.png']
         elif self.group==3:
-            if self.type == 0:
-                self.image = setup.GRAPHICS['you_1.png']
-            if self.type == 1:
-                self.image = setup.GRAPHICS['you_2.png']
-            if self.type == 2:
-                self.image = setup.GRAPHICS['you_3.png']
-            if self.type == 3:
-                self.image = setup.GRAPHICS['you_4.png']
-            if self.type == 4:
-                self.image = setup.GRAPHICS['you_5.png']
-            if self.type == 5:
-                self.image = setup.GRAPHICS['you_6.png']
+            self.image = setup.GRAPHICS[f'you_{self.type+1}.png']
 
 
         self.rect = self.image.get_rect()

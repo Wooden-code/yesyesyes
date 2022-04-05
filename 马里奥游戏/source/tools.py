@@ -46,24 +46,12 @@ class Game:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.display.quit()
-                    quit()
+                    exit()
                 elif event.type == pygame.KEYDOWN:
                     self.keys = pygame.key.get_pressed()#keys按键
                 elif event.type == pygame.KEYUP:
                     self.keys == pygame.key.get_pressed()
             self.update()
-            '''
-            self.screen.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))  # 不断随机填充颜色
-            image=get_image(GRAPHICS['mario_bros.png'],145,32,16,16,(0,0,0),5) #x，y，宽，高，抠图底色，放大倍数
-            self.screen.blit(image,(300,300))
-            '''
-            #print(state,id(state))
-            #state.get_instance().update(self.screen,self.keys)
-
-            #state.get_instance().update(self.screen, self.keys)
-            #state().update(self.screen,self.keys)#如果state后面的圆括号不加会报后面的错误。对象的声明需要括号，而类的声明括号可有可无，TypeError: update() missing 1 required positional argument: 'surface'
-            #state.update(self)
 
             pygame.display.update()
             self.clock.tick(60)  # 每秒六十帧 越大越流畅，但电脑负荷也就越大
@@ -73,8 +61,6 @@ def load_graphics(path):
         graphics = {}
         for pic in os.listdir(path):
             try :
-
-
                  img = pygame.image.load(os.path.join(path, pic))
                  if img.get_alpha():  # 如果是透明底的
 

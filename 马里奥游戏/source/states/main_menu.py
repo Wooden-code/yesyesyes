@@ -39,8 +39,8 @@ class MainMenu:
             self.lxr=setup.GRAPHICS['lxr.png']
             self.info = info.Info('main_menu', self.game_info)
             self.finished = False  # 只要这个阶段还在运行就不完结
-            self.next = 'introduction'  # 载入游戏阶段 也就是这里对应的下一阶段
-
+            #self.next = 'introduction'  # 载入游戏阶段 也就是这里对应的下一阶段
+            self.next='load_screen'
     def setup_background(self):  # 设置底图
         self.background = setup.GRAPHICS['main_title.png']
         self.background_rect = self.background.get_rect()

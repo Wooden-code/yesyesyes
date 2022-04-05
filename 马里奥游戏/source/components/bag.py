@@ -51,8 +51,8 @@ class Bag:
 
     def draw(self,surface):#绘画
 
-
-        surface.blit(self.bag_image[0],(0,0))#用blit方法画出来 对应 图片，位置
+        pass
+        #surface.blit(self.bag_image[0],(0,0))#用blit方法画出来 对应 图片，位置
 
         #surface.blit(self.count_word,(10,55))
 

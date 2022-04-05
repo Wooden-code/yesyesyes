@@ -20,13 +20,12 @@ class Body_title:
         }
         self.start(game_info)
     def start(self,game_info):
-        self.background=[setup.GRAPHICS['chuangguan_1.png'],setup.GRAPHICS['chuangguan_1.png'],setup.GRAPHICS['chuangguan_2.png'],setup.GRAPHICS['chuangguan_3.png'],setup.GRAPHICS['chuangguan_4.png'],
-                         setup.GRAPHICS['chuangguan_5.png']]
+        self.background=[setup.GRAPHICS['body_title_chibifu.png'],setup.GRAPHICS['chuangguan_end2.png']]
         self.index=0
         self.background_rect = self.background[self.index].get_rect()
         self.game_ground = pygame.Surface((self.background_rect.width, self.background_rect.height))
-       # self.background[self.index]= pygame.transform.scale(self.background[self.index], (
-            #int(self.background_rect.width * 0.46), int(self.background_rect.height *0.57)))
+        self.background[0]= pygame.transform.scale(self.background[0], (
+            int(self.background_rect.width * 0.46), int(self.background_rect.height *0.57)))
         self.game_info=game_info
         self.time=pygame.time.get_ticks()
 

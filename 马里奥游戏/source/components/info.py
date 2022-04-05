@@ -15,6 +15,7 @@ class Info:
         self.create_info_labels()
         self.flash_coin=coin.FlashingCoin()
         self.count_word = setup.GRAPHICS['count_word.png']
+        self.jinnang=setup.GRAPHICS['jinnang.png']
 
 
     def create_state_labels(self):#创作某个阶段特有的文字，分数，金币，时间，等信息
@@ -68,7 +69,7 @@ class Info:
         #rect = label_image.get_rect()  # 先把字体变小产生图片
         #label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale), int(rect.height * height_scale)))  # 放大产生锯齿效果
         #return label_image
-        self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (410, 60)))
+        self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (510, 60)))
         #self.draw(surface)
 
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
@@ -80,7 +81,8 @@ class Info:
         #print(self.state_labels[0][0],self.state_labels[0][1])
         #for label in self.state_labels:
         surface.blit(self.state_labels[-1][0],self.state_labels[-1][1])#用blit方法画出来 对应 图片，位置
-        surface.blit(self.count_word,(10,55))
+        surface.blit(self.count_word,(100,55))
+        surface.blit(self.jinnang, (10, 20))
         #for label in self.info_labels:
         #    surface.blit(label[0],label[1])
         #surface.blit(self.flash_coin.image,self.flash_coin.rect)

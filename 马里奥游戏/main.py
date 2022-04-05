@@ -7,7 +7,7 @@
 # 程序主要入口
 import pygame,os
 from source import tools, setup,sound
-from source.states import main_menu,load_screen,level,ask,body_title,introduction,chengyu
+from source.states import main_menu,load_screen,level,ask,body_title,introduction,chengyu,chuangguan,drop
 
 
 def main():
@@ -18,6 +18,8 @@ def main():
         'level':level.Level(),
         'ask':ask.Ask(),
         'body_title':body_title.Body_title(),
+        'chuangguan':chuangguan.Chuangguan(),
+        'drop':drop.drop(),
         'chengyu': chengyu.Chengyu()
 
 

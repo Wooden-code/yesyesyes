@@ -22,7 +22,6 @@ def main():
         'drop':drop.drop(),
         'chengyu': chengyu.Chengyu()
 
-
     }
 
     game = tools.Game(state_dict,'main_menu')

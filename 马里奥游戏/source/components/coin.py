@@ -66,6 +66,11 @@ class Coin(pygame.sprite.Sprite):
             self.image=setup.GRAPHICS[f'han_{self.type+1}.png']
         elif self.group==3:
             self.image = setup.GRAPHICS[f'you_{self.type+1}.png']
+        elif self.group==4:#回血
+            self.image=setup.GRAPHICS[f're_blood_{self.type}.png']
+
+        elif self.group==5:
+            self.image=setup.GRAPHICS['sentence_close.png']
 
 
         self.rect = self.image.get_rect()

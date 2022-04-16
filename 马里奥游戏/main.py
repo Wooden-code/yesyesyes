@@ -6,6 +6,8 @@
 
 # 程序主要入口
 import pygame,os
+# A_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# print(A_DIR+'\马里奥游戏')
 from source import tools, setup,sound
 from source.states import main_menu,load_screen,level,ask,body_title,introduction,chengyu,chuangguan,drop
 
@@ -34,7 +36,17 @@ def main():
 
 
 if __name__ == '__main__':
-    pygame.mixer.music.load(os.path.abspath("resource/music/start.ogg"))  # 方法问题
+    abs = os.getcwd()
+    sds = abs.split(r'\\')
+    # print(sds)
+    # sds.pop(-1)
+    ewr = r'\\'.join(sds) + r'\\resource\\music\\start.ogg'
+    try:
+        pygame.mixer.music.load(ewr)  # 方法问题
+    except:
+        ewr = sds[0].split('dist')[0] + r'\\resource\\music\\start.ogg'
+        ewr = ewr.encode('utf-8')
+        pygame.mixer.music.load(ewr)
     pygame.mixer.music.set_volume(1.0)  # 设置音量
     pygame.mixer.music.play(-1)
     main()

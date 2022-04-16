@@ -44,7 +44,6 @@ class LoadScreen:
                 surface.blit(tips_2, (560, 330))
                 pygame.display.update()
             elif mouse == (1, 0, 0):
-                pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
                 self.finished=True
         elif 560 < mouse_x < 640 and 343 < mouse_y < 549:
             if mouse == (0, 0, 0):
@@ -54,7 +53,6 @@ class LoadScreen:
                 surface.blit(tips_1, (218, 295))
                 pygame.display.update()
             elif mouse == (1, 0, 0):
-                pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
                 self.finished=True
         elif 841 < mouse_x < 921 and 313 < mouse_y < 519:
             if mouse == (0, 0, 0):
@@ -64,14 +62,12 @@ class LoadScreen:
                 surface.blit(tips_1, (218, 295))
                 pygame.display.update()
             elif mouse == (1, 0, 0):
-                pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
                 self.finished=True
         elif 560 < mouse_x < 640 and 800 < mouse_y < 1000:
             surface.blit(tips_3, (841, 300))
             surface.blit(tips_2, (560, 330))
             surface.blit(tips_1, (218, 295))
             if mouse == (1, 0, 0):
-                pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
                 exit()
         else:
             surface.blit(tips_3, (841, 300))

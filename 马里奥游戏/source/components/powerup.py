@@ -7,6 +7,18 @@ from .. import constants as C
 def create_powerup(centerx,centery,type):#根据主角不同状态出不同的东西
     return Mushroom(centerx,centery)
 
+def gogo(num):
+    if num==1:
+        fii='test1.ogg'
+    abs = os.getcwd()
+    sds = abs.split(r'\\')
+    ewr = sds[0] + r'\\resource\\music\\'+fii
+    try:
+        pygame.mixer.Sound(ewr).play()
+    except:
+        ewr = sds[0].split('dist')[0] + r'resource\\music\\' + fii
+        pygame.mixer.Sound(ewr).play()
+    return 0
 
 
 
@@ -102,7 +114,7 @@ class Fireball(Powerup):
         self.y_vel=0
 
         self.timer=0
-        pygame.mixer.Sound(os.path.abspath("resource/music/test1.ogg")).play()
+        gogo(1)
 
 
 

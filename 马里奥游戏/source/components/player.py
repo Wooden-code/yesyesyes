@@ -7,6 +7,7 @@ import os
 from ..components import powerup
 
 class Player(pygame.sprite.Sprite):
+    num=0
     def __init__(self,name):
         self.name='boyu'
         self.load_data()
@@ -17,7 +18,9 @@ class Player(pygame.sprite.Sprite):
 
     def load_data(self):#json文件被转化为了python中的字典 载入玩家的json文件  共同的json
         file_name=self.name+'.json'
-        file_path=os.path.join('source/data/player',file_name)#拼出文件路径
+        # file_path=os.path.join('source/data/player',file_name)#拼出文件路径
+        #TODO:path
+        file_path=r'C:\Users\abc\Desktop\yesyesyes\马里奥游戏\source\data\player\boyu.json'
         with open(file_path,encoding='utf-8-sig',errors='ignore') as f:
             self.player_data=json.load(f,strict=False)#加载后的文件就是一个字典
 
@@ -70,6 +73,9 @@ class Player(pygame.sprite.Sprite):
         boyu_day_normal_6 = setup.GRAPHICS['boyu_day_normal_6.png']
         boyu_day_normal_7 = setup.GRAPHICS['boyu_day_normal_7.png']
         boyu_day_normal_8 = setup.GRAPHICS['boyu_day_normal_8.png']
+        boyu_day_normal_9 = setup.GRAPHICS['boyu_day_normal_9.png']
+        boyu_day_normal_10 = setup.GRAPHICS['boyu_day_normal_10.png']
+
 
         boyu_day_special_1 = setup.GRAPHICS['boyu_day_special_1.png']
         boyu_day_special_2 = setup.GRAPHICS['boyu_day_special_2.png']
@@ -79,18 +85,22 @@ class Player(pygame.sprite.Sprite):
         boyu_day_special_6 = setup.GRAPHICS['boyu_day_special_6.png']
         boyu_day_special_7 = setup.GRAPHICS['boyu_day_special_7.png']
         boyu_day_special_8 = setup.GRAPHICS['boyu_day_special_8.png']
+        boyu_day_special_9 = setup.GRAPHICS['boyu_day_special_10.png']
+        boyu_day_special_10 = setup.GRAPHICS['boyu_day_special_10.png']
 
         boyu_night_normal=setup.GRAPHICS['boyu_night_normal.png']
         boyu_night_special=setup.GRAPHICS['boyu_night_special.png']
         frame_rects = self.player_data['image_frames']
 
-        self.right_day_normal_frames = [boyu_day_normal_1,boyu_day_normal_2,boyu_day_normal_3,boyu_day_normal_4,boyu_day_normal_5,boyu_day_normal_6,boyu_day_normal_7,boyu_day_normal_8]#区分开来的格格帧库 最底层
+        self.right_day_normal_frames = [boyu_day_normal_1,boyu_day_normal_2,boyu_day_normal_3,boyu_day_normal_4,boyu_day_normal_5,boyu_day_normal_6,boyu_day_normal_7,boyu_day_normal_8,boyu_day_normal_9,boyu_day_normal_10]#区分开来的格格帧库 最底层
         self.right_night_normal_frames = []
-        self.right_day_special_frames = [boyu_day_special_1,boyu_day_special_2,boyu_day_special_3,boyu_day_special_4,boyu_day_special_5,boyu_day_special_6,boyu_day_special_7,boyu_day_special_8]
+        self.right_day_special_frames = [boyu_day_special_1,boyu_day_special_2,boyu_day_special_3,boyu_day_special_4,boyu_day_special_5,boyu_day_special_6,boyu_day_special_7,boyu_day_special_8,boyu_day_special_9,boyu_day_special_10]
         self.right_night_special_frames=[]
-        self.left_day_normal_frames = [pygame.transform.flip(boyu_day_normal_1, True, False),pygame.transform.flip(boyu_day_normal_2, True, False),pygame.transform.flip(boyu_day_normal_3, True, False),pygame.transform.flip(boyu_day_normal_4, True, False),pygame.transform.flip(boyu_day_normal_5, True, False),pygame.transform.flip(boyu_day_normal_6, True, False),pygame.transform.flip(boyu_day_normal_7, True, False),pygame.transform.flip(boyu_day_normal_8, True, False)]
+        self.left_day_normal_frames = [pygame.transform.flip(boyu_day_normal_1, True, False),pygame.transform.flip(boyu_day_normal_2, True, False),pygame.transform.flip(boyu_day_normal_3, True, False),pygame.transform.flip(boyu_day_normal_4, True, False),pygame.transform.flip(boyu_day_normal_5, True, False),pygame.transform.flip(boyu_day_normal_6, True, False),pygame.transform.flip(boyu_day_normal_7, True, False),pygame.transform.flip(boyu_day_normal_8, True, False),
+                                       pygame.transform.flip(boyu_day_normal_9, True, False), pygame.transform.flip(boyu_day_normal_10, True, False)]
         self.left_night_normal_frames = []
-        self.left_day_special_frames = [pygame.transform.flip(boyu_day_special_1,True,False),pygame.transform.flip(boyu_day_special_2,True,False),pygame.transform.flip(boyu_day_special_3,True,False),pygame.transform.flip(boyu_day_special_4,True,False),pygame.transform.flip(boyu_day_special_5,True,False),pygame.transform.flip(boyu_day_special_6,True,False),pygame.transform.flip(boyu_day_special_7,True,False),pygame.transform.flip(boyu_day_special_8,True,False)]
+        self.left_day_special_frames = [pygame.transform.flip(boyu_day_special_1,True,False),pygame.transform.flip(boyu_day_special_2,True,False),pygame.transform.flip(boyu_day_special_3,True,False),pygame.transform.flip(boyu_day_special_4,True,False),pygame.transform.flip(boyu_day_special_5,True,False),pygame.transform.flip(boyu_day_special_6,True,False),pygame.transform.flip(boyu_day_special_7,True,False),pygame.transform.flip(boyu_day_special_8,True,False),
+                                        pygame.transform.flip(boyu_day_special_9,True,False),pygame.transform.flip(boyu_day_special_10,True,False)]
         self.left_night_special_frames=[]
 
         self.day_normal_frames=[self.right_day_normal_frames,self.left_day_normal_frames]
@@ -143,7 +153,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
 
-    def update(self,keys,level):#keys指的是按键
+    def update(self,keys,surfacewwwwwwwww,level):#keys指的是按键
         self.current_time=pygame.time.get_ticks()#人物帧的更新
         self.handle_states(keys,level)
         self.is_hurt_immune()
@@ -163,10 +173,15 @@ class Player(pygame.sprite.Sprite):
             self.fall(keys,level)
         elif self.state=='die':
             self.die(keys)
+        elif self.state=='hurt':
+            print('yyyyyyy')
+            self.hurt(keys,level)
         elif self.state=='small2big':
             self.small2big(keys)
         elif self.state=='big2small':
             self.big2small(keys)
+        elif self.state=='re_blood':
+            self.re_blood(keys,level)
         #else:
         #    self.state=None
         if self.face_right:
@@ -202,7 +217,14 @@ class Player(pygame.sprite.Sprite):
             self.y_vel=self.jump_vel
         elif keys[pygame.K_SPACE] and self.can_shoot:#设置空格键
             self.shoot_fireball(level)
+        elif keys[pygame.K_w] :
+            if level.if_change==True:
 
+                self.state='re_blood'
+                self.re_timer=pygame.time.get_ticks()
+
+            #level.change=False
+        #print(level.if_change)
 
     def walk(self,keys,level):
 
@@ -302,6 +324,17 @@ class Player(pygame.sprite.Sprite):
         if self.y_vel==0:
             self.can_jump=True
 
+    def re_blood(self,keys,level):
+        #print(self.re_timer)
+        if pygame.time.get_ticks()-self.re_timer>2000:
+            if level.lives<3:
+                level.lives=level.lives+1
+            level.change.kill()
+            self.state='stand'
+        else:
+            self.frame_index=9
+
+
 
 
 
@@ -309,6 +342,26 @@ class Player(pygame.sprite.Sprite):
         self.rect.y+=self.y_vel
         self.y_vel+=self.anti_gravity
 
+    def hurt(self,keys, level):
+        self.frame_index=8
+        pygame.time.wait(100)
+        self.state='hurt'
+        print('aaaaaaaaaaaaa')
+        self.x_vel = 0
+        self.y_vel = 0
+        # self.can_jump=True
+        if keys[pygame.K_RIGHT]:
+            self.face_right = True
+            self.state = 'walk'
+        elif keys[pygame.K_LEFT]:
+            self.face_right = False
+            self.state = 'walk'
+            # and self.can_jump
+        elif keys[pygame.K_UP]:
+            self.state = 'jump'
+            self.y_vel = self.jump_vel
+        elif keys[pygame.K_SPACE] and self.can_shoot:  # 设置空格键
+            self.shoot_fireball(level)
 
     def go_die(self):
         self.dead=True
@@ -316,6 +369,7 @@ class Player(pygame.sprite.Sprite):
         self.frame_index=4
         self.state='die'
         self.death_timer=self.current_time
+
 
     def small2big(self,keys):
         frame_dur=100
@@ -403,7 +457,10 @@ class Player(pygame.sprite.Sprite):
                 self.hurt_immune_timer=0
 
     def shoot_fireball(self,level):
-         self.frame_index=5#注意这里是发大招的姿势
+         if self.big==False:
+            self.frame_index=5#注意这里是发大招的姿势
+         elif self.big==True:
+             self.frame_index=7
          if self.current_time-self.last_fireball_timer>300:
             fireball=powerup.Fireball(self.rect.centerx,self.rect.centery,self.face_right)#火球是pygame中的精灵
             level.powerup_group.add(fireball)#把发射火球这个方法传入level中的这个组中

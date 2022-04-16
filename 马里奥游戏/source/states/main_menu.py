@@ -40,13 +40,13 @@ class MainMenu:
             self.info = info.Info('main_menu', self.game_info)
             self.finished = False  # 只要这个阶段还在运行就不完结
             #self.next = 'introduction'  # 载入游戏阶段 也就是这里对应的下一阶段
-            self.next='load_screen'
+            self.next='level'
     def setup_background(self):  # 设置底图
-        self.background = setup.GRAPHICS['main_title.png']
-        self.background_rect = self.background.get_rect()
-        self.background = pygame.transform.scale(self.background, (
-            int(self.background_rect.width * C.BG_W_MULTI), int(self.background_rect.height * C.BG_H_MULTI)))
-        self.viewport = setup.SCREEN.get_rect()  # 滑动窗口
+            self.background = setup.GRAPHICS['main_title.png']
+            self.background_rect = self.background.get_rect()
+            self.background = pygame.transform.scale(self.background, (
+                int(self.background_rect.width * C.BG_W_MULTI), int(self.background_rect.height * C.BG_H_MULTI)))
+            self.viewport = setup.SCREEN.get_rect()  # 滑动窗口
 
 
 

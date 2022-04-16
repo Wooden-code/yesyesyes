@@ -5,6 +5,21 @@ from .. import constants as C
 from ..components import info  # 到上一级目录平行的components
 import random
 
+def gogo(num):
+    if num==1:
+        fii='eat.ogg'
+    elif num==2:
+        fii='drop.ogg'
+    abs = os.getcwd()
+    sds = abs.split(r'\\')
+    ewr = sds[0] + r'\\resource\\music\\'+fii
+    try:
+        pygame.mixer.Sound(ewr).play()
+    except:
+        ewr = sds[0].split('dist')[0] + r'resource\\music\\' + fii
+        pygame.mixer.Sound(ewr).play()
+    return 0
+
 
 class Ask:
     i = 0
@@ -35,7 +50,7 @@ class Ask:
         self.explanation2 =[setup.GRAPHICS['question2_1.png'],setup.GRAPHICS['question2_2.png'],setup.GRAPHICS['question2_3.png'],setup.GRAPHICS['question2_4.png']]
         self.explanation3 = [setup.GRAPHICS['question3_1.png'],setup.GRAPHICS['question3_2.png']]
 
-        self.frames_answer=[pygame.image.load(os.path.abspath("resource/graphics/answer1.png")),pygame.image.load(os.path.abspath("resource/graphics/answer2.png")),pygame.image.load(os.path.abspath("resource/graphics/answer3.png"))]
+        self.frames_answer=[setup.GRAPHICS['answer1.png'],setup.GRAPHICS['answer2.png'],setup.GRAPHICS['answer3.png']]
         self.frames_explanation=[self.explanation1,self.explanation2,self.explanation3]
 
 
@@ -53,7 +68,8 @@ class Ask:
         self.next = 'load_screen'
 
     def setup_background(self):  # 设置底图\\
-        self.num = random.randint(0, 2)
+
+        self.num =random.randint(0,2)
         self.background = self.frames[self.num]  #
         self.background_rect = self.background.get_rect()
         self.background = pygame.transform.scale(self.background, (
@@ -68,13 +84,12 @@ class Ask:
         surface.blit(self.background, (450, 179.5))
         # check_0= tools.button(*self.answer_rects[0])#检查各个选项
         # check_1= tools.button(*self.answer_rects[1])
-
         # check_2= tools.button(*self.answer_rects[2])
         # check_3= tools.button(*self.answer_rects[3])
         self.answer = self.answer_dict[str(self.num)]  # 记录正确答案对应的选项
         check_right = tools.button(*self.answer_rects[self.answer])
         self.time = pygame.time.get_ticks()
-        print(pygame.mouse.get_pos())
+        #print(pygame.mouse.get_pos())
         #if self.curTime!=None:
             #if pygame.time.get_ticks() - self.curTime > 5000:
                 #for explanation in self.frames_explanation[self.num]:
@@ -88,9 +103,9 @@ class Ask:
 
 
 
-        print(check_right)
+        #print(check_right)
         if check_right == 8 and self.ct==0:
-            print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
+            #print((self.answer_rects[self.num])[0],(self.answer_rects[self.num])[0])
             #pygame.transform.scale(self.frames_answer[self.num], (1, 1))
             self.background.blit(self.frames_answer[self.num],(-4,17))
             self.ct+=1
@@ -106,15 +121,18 @@ class Ask:
         #    surface.blit(self.frames_explanation[self.num][i], (450, 179.5))
         #   i += 1
         mouse = pygame.mouse.get_pressed()
-        print(mouse)
+        #print(mouse)
         #self.before_i = self.i-1
         if mouse == (1, 0, 0) and self.i < len(self.frames_explanation[self.num]) and check_right!=8 and self.ct!=0 and self.before_i<self.i:
+            gogo(2)
             self.before_i=self.i
             pygame.time.wait(500)
             self.background.blit(self.frames_explanation[self.num][self.i], (0, 0))
             self.i += 1
+
             # print(i)
         elif mouse == (1, 0, 0) and self.i == len(self.frames_explanation[self.num]):
+            gogo(2)
             self.i=0
             self.ct=0
             self.before_i=-1

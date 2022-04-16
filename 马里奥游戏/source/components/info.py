@@ -16,6 +16,7 @@ class Info:
         self.flash_coin=coin.FlashingCoin()
         self.count_word = setup.GRAPHICS['count_word.png']
         self.jinnang=setup.GRAPHICS['jinnang.png']
+        self.blood=setup.GRAPHICS['blood.png']
 
 
     def create_state_labels(self):#创作某个阶段特有的文字，分数，金币，时间，等信息
@@ -72,17 +73,30 @@ class Info:
         self.state_labels.append((self.create_label('x  {}'.format(self.game_info['num'])), (510, 60)))
         #self.draw(surface)
 
+
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
 
 
-    def draw(self,surface):#绘画
-
+    def draw(self,surface,level):#绘画
+        ct=0
         #surface.blit(self.state_labels[0][0], self.state_labels[0][1])
         #print(self.state_labels[0][0],self.state_labels[0][1])
         #for label in self.state_labels:
         surface.blit(self.state_labels[-1][0],self.state_labels[-1][1])#用blit方法画出来 对应 图片，位置
         surface.blit(self.count_word,(100,55))
         surface.blit(self.jinnang, (10, 20))
+        #for i in (0,level.lives):
+        #    print("aaa",i)
+        #    if i>-1:
+         #       surface.blit(self.blood,(30+i*40,130))
+
+        while True:
+            if ct<level.lives:
+                surface.blit(self.blood, (30 + ct * 40, 130))
+                print("ii",ct)
+                ct+=1
+            else:
+                break
         #for label in self.info_labels:
         #    surface.blit(label[0],label[1])
         #surface.blit(self.flash_coin.image,self.flash_coin.rect)

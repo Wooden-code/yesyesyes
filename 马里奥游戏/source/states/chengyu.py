@@ -6,6 +6,21 @@ from .. import constants as C
 from ..components import info  # 到上一级目录平行的components
 import random
 
+def gogo(num):
+    if num==1:
+        fii='eat.ogg'
+    elif num==2:
+        fii='drop.ogg'
+    abs = os.getcwd()
+    sds = abs.split(r'\\')
+    ewr = sds[0] + r'\\resource\\music\\'+fii
+    try:
+        pygame.mixer.Sound(ewr).play()
+    except:
+        ewr = sds[0].split('dist') + r'resource\\music\\' + fii
+        pygame.mixer.Sound(ewr).play()
+    return 0
+
 
 class Chengyu:
     instance = None
@@ -179,7 +194,7 @@ class Chengyu:
             self.draw_Highlight_Box(box_x, box_y)  # 将这个方块标亮
 
             if not self.revealedBoxes[box_x][box_y] and self.mouseClicked == (1, 0, 0):  # 如果不是打开的并且鼠标点击了，则再打开
-                pygame.mixer.Sound(os.path.abspath("resource/music/drop.ogg")).play()
+                gogo(2)
                 shape, type = self.get_Shape_And_Color(box_x, box_y)
                 self.draw_Icon(shape, box_x, box_y)
                 # self.draw_Board(self.mainBoard, self.revealedBoxes)

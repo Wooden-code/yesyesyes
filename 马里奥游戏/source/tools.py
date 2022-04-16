@@ -60,16 +60,19 @@ class Game:
 def load_graphics(path):
         graphics = {}
         for pic in os.listdir(path):
-            try :
-                 img = pygame.image.load(os.path.join(path, pic))
-                 if img.get_alpha():  # 如果是透明底的
-
-                     img = img.convert_alpha()
-                 else:
-                     img = img.convert_alpha()
-                 graphics[pic] = img
-            except:
-                pass
+            # try :
+            #     abs = os.getcwd()
+            #     sds=abs.split(r'\\')
+            #     sds.pop(-1)
+            #     ewr=r'\\'.join(sds)+r'\resource\graphics'
+            #     # GRAPHICS = pygame.image.load(abs)
+            #     # print(abs+ewr+'\\'+pic)
+            #     img = pygame.image.load(abs+ewr+'\\'+pic)
+            #     graphics[pic] = img
+            # except:
+            # TODO:path
+            img=pygame.image.load(r'C:\Users\abc\Desktop\yesyesyes\马里奥游戏\resource\graphics'+'\\'+pic)
+            graphics[pic] = img
         return graphics
 
 

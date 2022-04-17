@@ -174,7 +174,7 @@ class Player(pygame.sprite.Sprite):
         elif self.state=='die':
             self.die(keys)
         elif self.state=='hurt':
-            print('yyyyyyy')
+            # print('yyyyyyy')
             self.hurt(keys,level)
         elif self.state=='small2big':
             self.small2big(keys)
@@ -346,7 +346,7 @@ class Player(pygame.sprite.Sprite):
         self.frame_index=8
         pygame.time.wait(100)
         self.state='hurt'
-        print('aaaaaaaaaaaaa')
+        # print('aaaaaaaaaaaaa')
         self.x_vel = 0
         self.y_vel = 0
         # self.can_jump=True

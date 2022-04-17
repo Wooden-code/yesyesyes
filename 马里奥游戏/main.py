@@ -6,8 +6,6 @@
 
 # 程序主要入口
 import pygame,os
-# A_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# print(A_DIR+'\马里奥游戏')
 from source import tools, setup,sound
 from source.states import main_menu,load_screen,level,ask,body_title,introduction,chengyu,chuangguan,drop
 

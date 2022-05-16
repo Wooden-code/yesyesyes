@@ -93,7 +93,7 @@ class Info:
         while True:
             if ct<level.lives:
                 surface.blit(self.blood, (30 + ct * 40, 130))
-                print("ii",ct)
+                # print("ii",ct)
                 ct+=1
             else:
                 break

@@ -18,7 +18,6 @@ def create_enemy(enemy_data):
     return enemy
 
 class Enemy(pygame.sprite.Sprite):
-    ct=0
     def __init__(self,x,y_bottom,direction,name,frame_rects):
         pygame.sprite.Sprite.__init__(self)
         self.direction=direction
@@ -44,20 +43,18 @@ class Enemy(pygame.sprite.Sprite):
 
     def load_frames(self,name,frame_rects):
         if name=='goomba':#normal
-                self.left_frames=[setup.GRAPHICS['n_enemy_1.png'],setup.GRAPHICS['n_enemy_2.png'],setup.GRAPHICS['n_enemy_3.png'],setup.GRAPHICS['n_enemy_6.png'],setup.GRAPHICS['n_enemy_7.png']]
+                self.left_frames=[setup.GRAPHICS['n_enemy_1.png'],setup.GRAPHICS['n_enemy_2.png'],setup.GRAPHICS['n_enemy_3.png'],setup.GRAPHICS['n_enemy_6.png']]
                 self.right_frames=[pygame.transform.flip(setup.GRAPHICS['n_enemy_1.png'],True,False),
                                    pygame.transform.flip(setup.GRAPHICS['n_enemy_2.png'],True,False),
                                    pygame.transform.flip(setup.GRAPHICS['n_enemy_3.png'],True,False),
-                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_6.png'],True,False),
-                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_7.png'],True,False)]
+                                   pygame.transform.flip(setup.GRAPHICS['n_enemy_6.png'],True,False)]
         if name=='koopa':
 
-                self.left_frames=[setup.GRAPHICS['enemy1.png'],setup.GRAPHICS['enemy2.png'],setup.GRAPHICS['enemy3.png'],setup.GRAPHICS['enemy6.png'],setup.GRAPHICS['n_enemy_7.png']]
+                self.left_frames=[setup.GRAPHICS['enemy1.png'],setup.GRAPHICS['enemy2.png'],setup.GRAPHICS['enemy3.png'],setup.GRAPHICS['enemy6.png']]
                 self.right_frames = [pygame.transform.flip(setup.GRAPHICS['enemy1.png'], True, False),
                                      pygame.transform.flip(setup.GRAPHICS['enemy2.png'], True, False),
                                      pygame.transform.flip(setup.GRAPHICS['enemy3.png'], True, False),
-                                     pygame.transform.flip(setup.GRAPHICS['enemy6.png'], True, False),
-                                     pygame.transform.flip(setup.GRAPHICS['n_enemy_7.png'], True, False)]
+                                     pygame.transform.flip(setup.GRAPHICS['enemy6.png'], True, False)]
 
     def update(self,level):
         self.current_time=pygame.time.get_ticks()
@@ -76,8 +73,6 @@ class Enemy(pygame.sprite.Sprite):
             self.trampled(level)
         elif self.state=='slide':
             self.slide()
-        elif self.state=='hurt':
-            self.hurt(level)
 
         if self.direction:
             self.image=self.right_frames[self.frame_index]
@@ -105,12 +100,7 @@ class Enemy(pygame.sprite.Sprite):
 
         if self.current_time - self.death_timer > 80:
             self.kill()
-    def hurt(self,level):
 
-        self.frame_index=4
-        self.image=self.frames[self.frame_index]
-        if self.current_time - self.death_timer > 100:
-            self.state='walk'
 
 
     def trampled(self,level):
@@ -140,21 +130,10 @@ class Enemy(pygame.sprite.Sprite):
 
         powerup=pygame.sprite.spritecollideany(self,level.powerup_group)
         if powerup:
-
-            if powerup.name=='fireball' and level.player.big!=True:
-                self.ct+= 1
+            if powerup.name=='fireball':
                 self.death_timer=self.current_time
-                if self.ct==2:
-                    self.state='die'
-                else:
-                    self.state='hurt'
-                powerup.kill()
-
-            if powerup.name == 'fireball' and level.player.big != False:
-                self.death_timer = self.current_time
                 self.state='die'
-                powerup.kill()
-        if self.rect.x-level.player.rect.x<600 and self.can_shoot==True :
+        if self.rect.x-level.player.rect.x<600 and self.can_shoot==True and self.name=='koopa':
 
             self.shoot_slj(level)
             self.can_shoot=False
@@ -221,5 +200,3 @@ class special_enemy(Enemy):#乌龟 都继承敌人类
 
     def slide(self):
         pass
-
-

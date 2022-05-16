@@ -61,16 +61,12 @@ class Level:
         self.setup_checkpoints()
 
     def load_map_data(self):
-        # TODO:path
         file_name='level_1.json'
         file_path=os.path.join('source/data/maps',file_name)
 
         with open(file_path) as f:
             self.map_data = json.load(f)
-        abs = os.getcwd()
-        sds = abs.split(r'\\')
-        ewr = r'\\'.join(sds) + r'\\resource\\music\\main.ogg'
-        pygame.mixer.music.load(ewr)  # 方法问题
+        pygame.mixer.music.load(r'resource/music/main.ogg')  # 方法问题
         pygame.mixer.music.set_volume(1.0)  # 设置音量
         pygame.mixer.music.play(-1)  # 循环播放
 

@@ -35,10 +35,8 @@ class LoadScreen:
         self.duration=2000
         self.timer=0
         self.info=info.Info('load_screen',self.game_info)
-        abs = os.getcwd()
-        sds = abs.split(r'\\')
-        ewr = r'\\'.join(sds) + r'\\resource\\music\\start.ogg'
-        pygame.mixer.music.load(ewr)  # 方法问题
+
+        pygame.mixer.music.load(r'resource/music/start.ogg')  # 方法问题
         pygame.mixer.music.set_volume(1.0)  # 设置音量
         pygame.mixer.music.play(-1)  # 循环播放
         #pygame.mixer.music.load(os.path.abspath("resource/music/start.ogg"))

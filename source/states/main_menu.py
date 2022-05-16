@@ -92,7 +92,7 @@ class MainMenu:
                 # pygame.time.Clock().tick(1)
             MainMenu.expanded_i = 6
         elif self.check_if == 8 and MainMenu.expanded_i == 6:
-            clip = VideoFileClip(r'.\resource\video\111.mp4')
+            clip = VideoFileClip(r'resource/video/111.mp4')
             # assert_approx_equal(float(clip.w) / float(clip.h), 16.0 / 9.0)
             # video_file = clip.crop(x1=clip.w / 8, x2=7 * clip.w / 8)
             # clip=clip.resize((1200,900))

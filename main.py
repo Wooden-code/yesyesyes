@@ -35,17 +35,5 @@ def main():
 
 
 if __name__ == '__main__':
-    abs = os.getcwd()
-    sds = abs.split(r'\\')
-    # print(sds)
-    # sds.pop(-1)
-    ewr = r'\\'.join(sds) + r'\\resource\\music\\start.ogg'
-    try:
-        pygame.mixer.music.load(ewr)  # 方法问题
-    except:
-        ewr = sds[0].split('dist')[0] + r'\\resource\\music\\start.ogg'
-        ewr = ewr.encode('utf-8')
-        pygame.mixer.music.load(ewr)
-    pygame.mixer.music.set_volume(1.0)  # 设置音量
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.load(r'resource/music/start.ogg')
     main()

@@ -15,9 +15,7 @@ class Pipe_and_well(pygame.sprite.Sprite):
 
         self.frames=[]
 
-        self.frames.append(setup.GRAPHICS['change_gate.png'])
-
-
+        self.frames.append(setup.GRAPHICS['pavilion.png'])
 
 
         self.image=self.frames[0]

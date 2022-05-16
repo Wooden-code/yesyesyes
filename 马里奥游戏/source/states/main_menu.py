@@ -4,17 +4,25 @@
 # @File : main_menu.py.py
 # @software: PyCharm
 
-import pygame,math,random
+import pygame,math,random,cv2
 from .. import setup  # ..是上一级文件
 from .. import tools
 from .. import constants as C
 from ..components import info  # 到上一级目录平行的components
 
 
+
 class MainMenu:
     instance = None
     expanded_i = 1
     walk=60
+    stream = '/Users/tianyujia/Desktop/11.mp4'
+
+    cap = cv2.VideoCapture(stream)
+
+    ret, img = cap.read()
+    screen=pygame.surface.Surface((img.shape[0], img.shape[1]))
+
 
     def __init__(self):
         game_info={
@@ -40,13 +48,13 @@ class MainMenu:
             self.info = info.Info('main_menu', self.game_info)
             self.finished = False  # 只要这个阶段还在运行就不完结
             #self.next = 'introduction'  # 载入游戏阶段 也就是这里对应的下一阶段
-            self.next='level'
+            self.next='load_screen'
     def setup_background(self):  # 设置底图
-            self.background = setup.GRAPHICS['main_title.png']
-            self.background_rect = self.background.get_rect()
-            self.background = pygame.transform.scale(self.background, (
-                int(self.background_rect.width * C.BG_W_MULTI), int(self.background_rect.height * C.BG_H_MULTI)))
-            self.viewport = setup.SCREEN.get_rect()  # 滑动窗口
+        self.background = setup.GRAPHICS['main_title.png']
+        self.background_rect = self.background.get_rect()
+        self.background = pygame.transform.scale(self.background, (
+            int(self.background_rect.width * C.BG_W_MULTI), int(self.background_rect.height * C.BG_H_MULTI)))
+        self.viewport = setup.SCREEN.get_rect()  # 滑动窗口
 
 
 
@@ -89,10 +97,14 @@ class MainMenu:
                 surface.blit(eval(f"self.paint{i}"), (612 - i * 30, 650))
                 pygame.display.flip()
                 surface.blit(self.background, self.viewport)
-                # pygame.time.Clock().tick(1)
             MainMenu.expanded_i = 6
         elif self.check_if == 8 and MainMenu.expanded_i == 6:
-            self.finished = True
+            img = cv2.transpose(MainMenu.img)
+
+            pygame.surfarray.blit_array(MainMenu.screen, img)
+            surface.blit(MainMenu.screen, (0, 0))
+
+            pygame.display.flip()
         elif MainMenu.expanded_i == 6:
             surface.blit(self.background, self.viewport)
             surface.blit(self.paint5, (462, 650))
@@ -104,6 +116,8 @@ class MainMenu:
             surface.blit(self.lmt, (1000-(math.sin(math.radians(MainMenu.walk))*400+487), 700-abs(math.sin(math.radians(MainMenu.walk))*646)))
             surface.blit(self.lxr,(random.randint(0,1200),random.randint(0,800)))
             surface.blit(self.yyt, (random.randint(0,1200),random.randint(0,800)))
+            self.finished = True
+
         MainMenu.walk+=1
 
     def reset_game_info(self):
